@@ -34,7 +34,6 @@ export default defineComponent({
       .map((item) => {
         return (item.path = `/${name}/${item.path}`), item
       })
-    console.log(list)
     return { list }
   },
 })

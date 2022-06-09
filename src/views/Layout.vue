@@ -17,13 +17,6 @@
       </div>
       <div class="layout-hd__static" style="height: 60px"></div>
     </header>
-    <!-- routeBar -->
-    <div class="layout-hd" style="height: 44px; margin-top: 1px" v-show="false">
-      <div class="layout-warp">
-        <u-route-bar />
-      </div>
-    </div>
-    <!-- <div class="layout-hd__fill" style="height:44px"></div> -->
     <router-view></router-view>
   </div>
 </template>

@@ -150,7 +150,7 @@ CMD ["npm", "start"]  # 容器启动时运行
 <script>
 	export default {
 		mounted() {
-			this.$cdn.Prism();    // 代码高亮
+			;    // 代码高亮
 		}
 	}
 </script>

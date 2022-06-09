@@ -22,7 +22,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-const name = 'docs';
+const name = 'docs'
 export default defineComponent({
   name,
   setup() {
@@ -33,7 +33,6 @@ export default defineComponent({
       .map((item) => {
         return (item.path = `/${name}/${item.path}`), item
       })
-    console.log(list)
     return { list }
   },
 })

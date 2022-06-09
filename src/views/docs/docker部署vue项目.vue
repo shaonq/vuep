@@ -48,7 +48,7 @@ COPY dist/&nbsp; /usr/share/nginx/html/&nbsp;
 <script>
 	export default {
 		mounted() {
-			this.$cdn.Prism();    // 代码高亮
+			;    // 代码高亮
 		}
 	}
 </script>
