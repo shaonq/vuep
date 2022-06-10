@@ -6,10 +6,10 @@
     </h1>
     <ul style>
       <li style>
-        <a href="https://cn.vuejs.org/v2/guide/syntax.html" style="color: rgb(0, 153, 255); margin: 0px 2px; padding: 0px; vertical-align: baseline;">模板文档</a>
+        <a href="https://cn.vuejs.org/v2/guide/syntax.html">模板文档</a>
       </li>
       <li style>
-        <a href="https://cn.vuejs.org/v2/api/" style="color: rgb(0, 153, 255); margin: 0px 2px; padding: 0px; vertical-align: baseline;">API文档</a>
+        <a href="https://cn.vuejs.org/v2/api/">API文档</a>
       </li>
     </ul>
     <pre><code class="language-javascript">
@@ -41,8 +41,8 @@ export default {
 }    </code></pre>
     <h1 style>vue-route 路由配置</h1>
     <ul style>
-      <li style="line-height: 24px;">
-        <a href="https://router.vuejs.org/zh/guide/essentials/named-routes.html" style="color: rgb(0, 153, 255); margin: 0px 2px; padding: 0px; vertical-align: baseline;">官方文档</a>
+      <li style="line-height: 24px">
+        <a href="https://router.vuejs.org/zh/guide/essentials/named-routes.html">官方文档</a>
       </li>
     </ul>
     <pre><code class="language-javascript">
@@ -55,8 +55,8 @@ export default {
    </code> </pre>
     <h1 style>vuex 状态管理</h1>
     <ul style>
-      <li style="line-height: 24px;">
-        <a href="https://vuex.vuejs.org/zh/guide/state.html" style="color: rgb(0, 153, 255); margin: 0px 2px; padding: 0px; vertical-align: baseline;">官方文档</a>
+      <li style="line-height: 24px">
+        <a href="https://vuex.vuejs.org/zh/guide/state.html">官方文档</a>
       </li>
     </ul>
     <pre><code class="language-javascript">
@@ -89,8 +89,7 @@ export default store
 <script>
 export default {
   mounted() {
-
-    ;    // 代码高亮
-  }
+    // 代码高亮
+  },
 }
 </script>

@@ -4,14 +4,18 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-
+import shaonq from 'shaonq'
 export default defineComponent({
   name: 'App',
+  setup(){
+    // google chrome tools debug
+    window.shaonq = shaonq;
+  }
 })
 </script>
 
 <style>
-// reset.css
+/* reset.css */
 body { -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.428571428; color: #212121; background-color: #fff }
 h1, h2, h3, h4, h5, h6 { font-size: 100%; margin: 0; font-weight: 400 }
 body, form, input, ul, ol, dl, dd, p { margin: 0 }
@@ -25,4 +29,6 @@ article, aside, details, figcaption, figure, footer, header, menu, nav, section 
 table { border-collapse: collapse; border-spacing: 0; width: 100% }
 code, kbd, pre, samp { font-family: monaco, menlo, consolas, 'courier new', courier, monospace; white-space: pre-wrap; word-wrap: break-word }
 body, input, button, textarea, select { font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif; }
+/* global.css */
+a { color: #09f;}
 </style>

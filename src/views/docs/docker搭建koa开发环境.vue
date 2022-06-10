@@ -1,26 +1,26 @@
 <template>
-	<div class="u-quill-body">
-		<h1>docker搭建koa开发环境</h1>
-		<h1>工具安装</h1>
-		<ul>
-			<li>docker windows<a href="https://www.docker.com/products/docker-desktop" target="_blank">下载地址</a></li>
-		</ul>
-		<hr>
-		<ol>
-			<li><code>images: node:10.16.0 + nginx +mysql:5.6 </code></li>
-			<li>
-				<code>koa: koa + koa-router + mysql + promise-mysql</code>
-			</li>
-			<li><code>docker-compose</code></li>
-		</ol>
-		<figure contenteditable="false" tabindex="-1">
-			<hr>
-		</figure>
-		<h1>根目录文件</h1>
-		<ul>
-			<li>server.js</li>
-		</ul>
-		<pre>
+  <div class="u-quill-body">
+    <h1>docker搭建koa开发环境</h1>
+    <h1>工具安装</h1>
+    <ul>
+      <li>docker windows<a href="https://www.docker.com/products/docker-desktop" target="_blank">下载地址</a></li>
+    </ul>
+    <hr />
+    <ol>
+      <li><code>images: node:10.16.0 + nginx +mysql:5.6 </code></li>
+      <li>
+        <code>koa: koa + koa-router + mysql + promise-mysql</code>
+      </li>
+      <li><code>docker-compose</code></li>
+    </ol>
+    <figure contenteditable="false" tabindex="-1">
+      <hr />
+    </figure>
+    <h1>根目录文件</h1>
+    <ul>
+      <li>server.js</li>
+    </ul>
+    <pre>
 const Koa = require('koa')
 const Router = require('koa-router')
 const mysql = require('promise-mysql')
@@ -44,11 +44,13 @@ ctx.body = res
 
 app.use(router.routes())
 app.listen(3000)
-</pre>
-		<ul>
-			<li>package.json</li>
-		</ul>
-		<pre>{
+</pre
+    >
+    <ul>
+      <li>package.json</li>
+    </ul>
+    <pre>
+{
   "name": "docker-koa",
   "version": "1.0.0",
   "description": "",
@@ -66,21 +68,24 @@ app.listen(3000)
     "promise-mysql": "^5.0.3"
   }
 }
-</pre>
-		<ul>
-			<li>.dockerignore</li>
-		</ul>
-		<pre>
+</pre
+    >
+    <ul>
+      <li>.dockerignore</li>
+    </ul>
+    <pre>
 *.log
 .idea
 .node_modules
 node_modules
 .vscode
-</pre>
-		<ul>
-			<li>docker-compose.yml</li>
-		</ul>
-		<pre>version: "3"
+</pre
+    >
+    <ul>
+      <li>docker-compose.yml</li>
+    </ul>
+    <pre>
+version: "3"
 services:
         koa:
                 image: node:10.16.0                          #node镜像名称
@@ -111,12 +116,14 @@ services:
                         - ./compose/nginx.conf:/etc/nginx/conf.d/default.conf
                 ports:
                         - "80:80"
-</pre>
+</pre
+    >
 
-		<ul>
-			<li>compose/nginx.conf</li>
-		</ul>
-		<pre>server {
+    <ul>
+      <li>compose/nginx.conf</li>
+    </ul>
+    <pre>
+server {
     listen       80;
     server_name  localhost;
 
@@ -128,11 +135,12 @@ services:
         proxy_pass http://koa:3000;    #  docker-compose.yml koa
     }
 }
-			</pre>
-		<ul>
-			<li>compose/koa.Dockerfile</li>
-		</ul>
-		<pre>
+			</pre
+    >
+    <ul>
+      <li>compose/koa.Dockerfile</li>
+    </ul>
+    <pre>
 FROM node:10.16.0                       # 使用的基础镜像文件
 WORKDIR /koa                            # 工作目录的路径
 COPY ./package.json ./server.js /koa/   # 拷贝文件到/koa
@@ -142,15 +150,14 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 	&& yarn config set registry https://registry.npm.taobao.org/ \
 	&& yarn       # 设置镜像源到国内, 更新; 安装yarn,yarn设置国内镜像源，安装依赖
 CMD ["npm", "start"]  # 容器启动时运行
-			</pre>
-
-	</div>
-
+			</pre
+    >
+  </div>
 </template>
 <script>
-	export default {
-		mounted() {
-			;    // 代码高亮
-		}
-	}
+export default {
+  mounted() {
+    // 代码高亮
+  },
+}
 </script>

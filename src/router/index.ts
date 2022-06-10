@@ -13,21 +13,29 @@ const vuePathNames: string[] = ['developer', 'docs']
 const vueRouters = vuePathNames.map((path) => {
   // 读取对应目录路由
   const keys = Object.keys(vuePaths).filter((i) => ~i.indexOf(`/views/${path}/`)) // && !~i.indexOf('Index.vue')
-  const list: vuePath[] = keys.map((name: string) => {
-    let _name = name.split('/').slice(-1)[0].slice(0, -4)
-    return {
-      path: toUnicode(_name),
-      name: _name,
-      component: vuePaths[name],
-    }
-  })
+  const list: vuePath[] = keys
+    .map((name: string) => {
+      let _name = name.split('/').slice(-1)[0].slice(0, -4)
+      return {
+        path: toUnicode(_name),
+        name: _name,
+        component: vuePaths[name],
+      }
+    })
+    .reverse()
   // 根据 Index 分类
   let component
-  const children = list.filter((i) => {
-    let is = i.path === 'Index'
-    if (is) component = i.component
-    return ~is
-  })
+  const children = list
+    .filter((i) => {
+      let is = i.path === 'Index'
+      if (is) component = i.component
+      return ~is
+    })
+    .map((item, index) => {
+      index || (item.path = '')
+      item.meta = { title: item.name }
+      return item
+    })
   return {
     path,
     name: path,
@@ -39,13 +47,16 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'Layout',
+    redirect: '/docs',
     component: () => import('@/views/Layout.vue'),
-    children: [...vueRouters, { path: '/:pathMatch(.*)*', name: 'not-found', component: () => import('@/views/404.vue') }],
+    children: [...vueRouters, { path: '/:pathMatch(.*)*', name: '404', meta: { title: 404 }, component: () => import('@/views/404.vue') }],
   },
 ]
 const router = createRouter({
   history: createWebHistory(),
   routes,
+  linkActiveClass: 'is-active',
+  linkExactActiveClass: 'is-exact-active',
 })
 
 export default router

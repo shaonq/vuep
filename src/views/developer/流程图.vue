@@ -2,12 +2,7 @@
   <div class="u-quill-body">
     <h2>流程图</h2>
     <blockquote>
-      <a
-        class="u-color-blue"
-        target="_blank"
-        href="https://www.yuque.com/alsmile/topology/qrukhs"
-        >api</a
-      >
+      <a class="u-color-blue" target="_blank" href="https://www.yuque.com/alsmile/topology/qrukhs">api</a>
       => <code>https://www.yuque.com/alsmile/topology/qrukhs</code>
     </blockquote>
     <blockquote>
@@ -27,19 +22,28 @@
       >
       <hr />
       <blockquote>topology-bundle cdn demo</blockquote>
-      <div
-        style="height: 300px; border: 1px solid #e1e1e1; position: relative"
-        id="l5l"
-      ></div>
+      <div style="height: 300px; border: 1px solid #e1e1e1; position: relative" id="l5l"></div>
     </div>
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import shaonq from 'shaonq'
+import { defineComponent, reactive, onMounted } from 'vue'
 export default {
-  data() {
-    return {
-      flowJson: {
+  setup() {
+    onMounted(async () => {
+      if (typeof Le5leTopology === 'undefined') {
+        console.time('Le5leTopology')
+        await shaonq.loadJs`https://unpkg.com/topology-bundle@0.5.36/index.js`
+        console.timeEnd('Le5leTopology')
+      }
+      const canvas = new Le5leTopology.Topology('l5l', {
+        on(event, data) {
+          if (data) console.log('onMessage', event, data)
+        },
+      })
+      canvas.open({
         pens: [
           {
             imageRatio: true,
@@ -60,7 +64,7 @@ export default {
             animateDuration: 0,
             animateFrames: [],
             animateFrame: 0,
-            name: "rectangle",
+            name: 'rectangle',
             tags: [],
             visible: true,
             rect: {
@@ -72,23 +76,22 @@ export default {
               ex: 366.6090612277943,
               ey: 148.45677138785376,
             },
-            fontColor: "#222222",
-            fontFamily:
-              '"Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial',
+            fontColor: '#222222',
+            fontFamily: '"Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial',
             fontSize: 11.988000000000019,
             lineHeight: 1.5,
-            fontStyle: "normal",
-            fontWeight: "normal",
-            textAlign: "center",
-            textBaseline: "middle",
-            textBackground: "",
+            fontStyle: 'normal',
+            fontWeight: 'normal',
+            textAlign: 'center',
+            textBaseline: 'middle',
+            textBackground: '',
             animateCycleIndex: 0,
             events: [],
             dash: 0,
             lineDashOffset: 0,
             lineWidth: 0.999000000000002,
-            strokeStyle: "#222222",
-            fillStyle: "",
+            strokeStyle: '#222222',
+            fillStyle: '',
             globalAlpha: 1,
             rotate: 0,
             offsetRotate: 0,
@@ -96,10 +99,10 @@ export default {
             textOffsetX: 0,
             textOffsetY: 0,
             animatePos: 0,
-            id: "6b1eea4",
+            id: '6b1eea4',
             zRotate: 0,
             borderRadius: 0.5,
-            imageAlign: "center",
+            imageAlign: 'center',
             gradientAngle: 0,
             gradientRadius: 0.01,
             paddingTop: 0,
@@ -107,9 +110,9 @@ export default {
             paddingLeft: 0,
             paddingRight: 0,
             children: [],
-            text: "开始",
+            text: '开始',
             type: 0,
-            animateType: "",
+            animateType: '',
             paddingLeftNum: 0,
             paddingRightNum: 0,
             paddingTopNum: 0,
@@ -162,7 +165,7 @@ export default {
             z: 0,
             iconSize: 0,
             evs: { x: 333, y: 615 },
-            TID: "1e0a8177",
+            TID: '1e0a8177',
             elementRendered: false,
           },
           {
@@ -184,7 +187,7 @@ export default {
             animateDuration: 0,
             animateFrames: [],
             animateFrame: 0,
-            name: "rectangle",
+            name: 'rectangle',
             tags: [],
             visible: true,
             rect: {
@@ -196,23 +199,22 @@ export default {
               ex: 445.10906122779375,
               ey: 265.13677138785397,
             },
-            fontColor: "#222222",
-            fontFamily:
-              '"Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial',
+            fontColor: '#222222',
+            fontFamily: '"Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial',
             fontSize: 11.988000000000019,
             lineHeight: 1.5,
-            fontStyle: "normal",
-            fontWeight: "normal",
-            textAlign: "center",
-            textBaseline: "middle",
-            textBackground: "",
+            fontStyle: 'normal',
+            fontWeight: 'normal',
+            textAlign: 'center',
+            textBaseline: 'middle',
+            textBackground: '',
             animateCycleIndex: 0,
             events: [],
             dash: 0,
             lineDashOffset: 0,
             lineWidth: 0.999000000000002,
-            strokeStyle: "#222222",
-            fillStyle: "",
+            strokeStyle: '#222222',
+            fillStyle: '',
             globalAlpha: 1,
             rotate: 0,
             offsetRotate: 0,
@@ -220,10 +222,10 @@ export default {
             textOffsetX: 0,
             textOffsetY: 0,
             animatePos: 0,
-            id: "8fad661",
+            id: '8fad661',
             zRotate: 0,
             borderRadius: 0,
-            imageAlign: "center",
+            imageAlign: 'center',
             gradientAngle: 0,
             gradientRadius: 0.01,
             paddingTop: 0,
@@ -231,9 +233,9 @@ export default {
             paddingLeft: 0,
             paddingRight: 0,
             children: [],
-            text: "流程",
+            text: '流程',
             type: 0,
-            animateType: "",
+            animateType: '',
             paddingLeftNum: 0,
             paddingRightNum: 0,
             paddingTopNum: 0,
@@ -286,11 +288,11 @@ export default {
             z: 0,
             iconSize: 0,
             evs: { x: 524, y: 711 },
-            TID: "1e0a8177",
+            TID: '1e0a8177',
             elementRendered: false,
           },
           {
-            name: "curve",
+            name: 'curve',
             tags: [],
             visible: true,
             rect: {
@@ -302,23 +304,22 @@ export default {
               ex: 0,
               ey: 0,
             },
-            fontColor: "",
-            fontFamily:
-              '"Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial',
+            fontColor: '',
+            fontFamily: '"Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial',
             fontSize: 11.988000000000019,
             lineHeight: 1.5,
-            fontStyle: "normal",
-            fontWeight: "normal",
-            textAlign: "center",
-            textBaseline: "middle",
-            textBackground: "#ffffff",
+            fontStyle: 'normal',
+            fontWeight: 'normal',
+            textAlign: 'center',
+            textBaseline: 'middle',
+            textBackground: '#ffffff',
             animateCycleIndex: 0,
             events: [],
             dash: 0,
             lineDashOffset: 0,
             lineWidth: 0.999000000000002,
-            strokeStyle: "#222222",
-            fillStyle: "",
+            strokeStyle: '#222222',
+            fillStyle: '',
             globalAlpha: 1,
             rotate: 0,
             offsetRotate: 0,
@@ -326,30 +327,30 @@ export default {
             textOffsetX: 0,
             textOffsetY: 0,
             animatePos: 0,
-            id: "0d19d98",
-            fromArrow: "",
-            toArrow: "triangleSolid",
+            id: '0d19d98',
+            fromArrow: '',
+            toArrow: 'triangleSolid',
             controlPoints: [
               {
                 x: 306.6690612277942,
                 y: 228.45677138785376,
                 direction: 3,
                 anchorIndex: 3,
-                id: "6b1eea4",
+                id: '6b1eea4',
               },
               {
                 x: 385.16906122779363,
                 y: 145.17677138785388,
                 direction: 1,
                 anchorIndex: 1,
-                id: "8fad661",
+                id: '8fad661',
               },
             ],
             fromArrowSize: 5,
             toArrowSize: 5,
             borderWidth: 0,
-            borderColor: "#000000",
-            animateColor: "",
+            borderColor: '#000000',
+            animateColor: '',
             animateSpan: 1,
             animateFromSize: 0,
             animateToSize: 0,
@@ -359,54 +360,33 @@ export default {
               y: 148.45677138785376,
               direction: 3,
               anchorIndex: 3,
-              id: "6b1eea4",
+              id: '6b1eea4',
             },
             to: {
               x: 385.16906122779363,
               y: 225.17677138785388,
               direction: 1,
               anchorIndex: 1,
-              id: "8fad661",
+              id: '8fad661',
             },
             type: 1,
             evs: { x: 514, y: 668 },
-            TID: "1e0a8177",
+            TID: '1e0a8177',
           },
         ],
-        lineName: "curve", // 当前图文默认连线类型
-        fromArrow: "", // 开始箭头
-        toArrow: "triangleSolid", // 结束箭头
+        lineName: 'curve', // 当前图文默认连线类型
+        fromArrow: '', // 开始箭头
+        toArrow: 'triangleSolid', // 结束箭头
         scale: 1, // 缩放 0-1
         locked: 1, // 0 未锁定，1只读，2不能移动，10 完全锁定
         x: 0,
         y: 0,
         rule: true,
-        ruleColor: "#000",
+        ruleColor: '#000',
         scroll: true,
-      },
-    };
+      })
+    })
+    return {}
   },
-  methods: {
-    dataInit() {
-      (async function (o) {
-        if (typeof Le5leTopology === "undefined") {
-          console.time("Le5leTopology");
-          await o.$util
-            .loadJs`https://unpkg.com/topology-bundle@0.5.36/index.js`;
-          console.timeEnd("Le5leTopology");
-        }
-        const canvas = new Le5leTopology.Topology("l5l", {
-          on(event, data) {
-            if (data) console.log("onMessage", event, data);
-            // if (canvas && canvas.data) console.log(JSON.stringify(canvas.pureData()));
-          },
-        });
-        canvas.open(o.flowJson);
-      })(this);
-    },
-  },
-  mounted() {
-    this.dataInit();
-  },
-};
+}
 </script>

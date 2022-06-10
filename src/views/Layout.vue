@@ -115,6 +115,6 @@ export default {
 }
 
 .layout-side a {
-  color: #212121;
+  color: #646464;
 }
 </style>
