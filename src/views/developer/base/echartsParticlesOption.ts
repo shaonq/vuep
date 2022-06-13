@@ -30,7 +30,7 @@ function get3dcoords(m: number, n: number, elapsedTime: number) {
 }
 
 const randData: { dist: number; groupId: string; value: number[] }[] = []
-const grid = 50
+const grid = 30
 for (let i = 0; i < grid; i++) {
   for (let k = 0; k < grid; k++) {
     const x = Math.random()
@@ -46,13 +46,36 @@ for (let i = 0; i < grid; i++) {
 randData.sort((a, b) => a.dist - b.dist)
 
 const waveOption: EChartsOption[] = [
+  // explosion
   {
     series: {
       type: 'custom',
       data: randData,
       coordinateSystem: undefined,
+      universalTransition: {
+        enabled: true,
+        seriesKey: 'point',
+      },
       animationThreshold: 1e5,
-      animationDurationUpdate: 500,
+      animationDurationUpdate: 100,
+      animationEasingUpdate: 'circularOut',
+    },
+  },
+  // grid
+  {
+    series: {
+      animationEasingUpdate: 'cubicInOut',
+      animationDurationUpdate: 100,
+      universalTransition: {
+        // Need to disable universal transition to continue custom series animation
+        enabled: false,
+      },
+    },
+  },
+  // wave
+  {
+    series: {
+      animationDurationUpdate: 0,
       animationEasingUpdate: 'cubicInOut',
       renderItem(params, api) {
         const idx = params.dataIndex
@@ -119,6 +142,31 @@ const waveOption: EChartsOption[] = [
       },
     },
   },
+  // To a dot
+  // {
+  //   series: {
+  //     animationEasingUpdate: 'cubicOut',
+  //     animationDurationUpdate: 500,
+  //     animationDelayUpdate: 0,
+
+  //     renderItem(params, api) {
+  //       return {
+  //         type: 'circle',
+  //         shape: {
+  //           cx: api.getWidth() / 2,
+  //           cy: api.getHeight() / 2,
+  //           r: 0,
+  //         },
+  //         transition: ['shape'],
+  //         style: {
+  //           transition: ['opacity'],
+  //           opacity: 0,
+  //           fill: '#999',
+  //         },
+  //       };
+  //     },
+  //   },
+  // },
 ]
 
 export default waveOption

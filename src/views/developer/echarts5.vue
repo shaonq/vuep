@@ -16,7 +16,8 @@
         <u-chart style="height: 200px" :options="line2" />
       </div>
       <div class="u-card__bd" style="background: #21285f">
-        <u-chart style="height: 360px; position: fixed; bottom: 0; right: -20%; left: -20%;pointer-events: none;" :options="particlesOption" />
+        <!-- <u-chart style="height: 360px; position: fixed; bottom: 0; right: 0; left: 0; pointer-events: none" :options="particlesOption" /> -->
+        <div style="height: 500px; position: fixed; bottom: 0; right: 0; left: 0; pointer-events: none; opacity: 0.2" id="Qvq"></div>
       </div>
     </div>
   </div>
@@ -24,11 +25,12 @@
 
 <script>
 import { graphic } from 'echarts'
-import particlesOption from './base/echartsParticlesOption'
+import shaonq from 'shaonq'
+// import particlesOption from './base/echartsParticlesOption'
 export default {
   data() {
     return {
-      particlesOption,
+      // particlesOption,
       len20list: [],
       line1: {
         tooltip: { show: true },
@@ -136,11 +138,45 @@ export default {
     },
     testChart5() {},
   },
-  created() {
-    this.dataInit()
-  },
   destroyed() {
     this.timer && clearTimeout(this.timer)
+  },
+  async mounted() {
+    this.dataInit()
+    window.module = {}
+    await shaonq.loadJs('https://unpkg.com/particle-wave')
+    const ParticleWave = window.module.exports
+    // 小圆点尺寸
+    const pointSize = 8
+    const pw = new ParticleWave(document.getElementById('Qvq'), {
+      uniforms: {
+        size: { type: 'float', value: pointSize },
+        field: { type: 'vec3', value: [0, 0, 0] },
+        speed: { type: 'float', value: 7 },
+      },
+      onResize(w, h, dpi) {
+        const position = []
+        const color = []
+        const width = 400 * (w / h)
+        const depth = 500
+        const height = 7
+        const distance = 9
+        for (let x = 0; x < width; x += distance) {
+          for (let z = 0; z < depth; z += distance) {
+            position.push(-width / 2 + x, -30, -depth / 2 + z)
+            color.push(0, 0, 0, 1)
+          }
+        }
+        if (this.uniforms) {
+          this.uniforms.field = [width, height, depth]
+          this.uniforms.size = (h / 400) * pointSize * dpi
+        }
+        if (this.buffers) {
+          this.buffers.position = position
+          this.buffers.color = color
+        }
+      },
+    })
   },
 }
 </script>

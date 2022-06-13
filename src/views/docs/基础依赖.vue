@@ -12,13 +12,11 @@
       <pre v-if="tabName === 'b'">
  .u-tabs .u-tabs__item
  .u-tabs .u-tabs__item.is-active
-        </pre
-      >
+        </pre>
       <pre v-else>
  Tab
  需要需要使用vm.data 配合 v-if 来使用
-        </pre
-      >
+        </pre>
     </div>
     <div class="u-quill-body">
       <h1>Button</h1>
@@ -244,9 +242,9 @@ export default {
       tabName: 'a',
     }
   },
-  setup(){
+  setup() {
     return {
-     shaonq:shaonq
+      shaonq: shaonq,
     }
   },
   methods: {

@@ -364,19 +364,21 @@ export default {
       this.timer && clearTimeout(this.timer)
       if (this.chart) {
         if (Array.isArray(this.options)) {
-          let idx = 0, len = this.options.length
+          let idx = 0,
+            len = this.options.length
           let loop = () => {
             // console.log(idx, len)
             this.chart.setOption(this.options[idx])
             idx++
-            if (idx >= len) idx = 0
-            this.timer = setTimeout(loop, 5000)
+            console.log(idx)
+            if (idx >= len) return
+            let time = this.options[idx - 1]?.series?.animationDurationUpdate || 500
+            this.timer = setTimeout(loop, time)
           }
           loop()
         } else {
           this.chart.setOption(this.options)
         }
-        //  duration: [700, 500, 1000, 500, 5000, 700, 500],
       }
     },
   },
