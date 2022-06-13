@@ -4,11 +4,11 @@
       <h1>富文本</h1>
       <p>轻量级基础富文本编辑器</p>
     </div>
-    <u-quill :handlers="handlers" style="height: 300px; border-right-width: 0; border-left-width: 0" type="json" :html="defaultJsonString" @change="onChange"> </u-quill>
-    <h1 style="padding: 20px 16px">预览</h1>
+    <u-quill :handlers="handlers" style="min-height: 282px; border-right-width: 0; border-left-width: 0" type="json" :html="defaultJsonString" @change="onChange"> </u-quill>
+
     <u-quill :handlers="handlers" :html="html" style="border: 0" type="json" readonly="readonly"></u-quill>
-    <h1 style="padding: 20px 16px">数据</h1>
     <div class="u-quill-body">
+      <h1>数据</h1>
       <pre>{{ html }}</pre>
     </div>
   </div>

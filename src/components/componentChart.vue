@@ -366,7 +366,7 @@ export default {
         if (Array.isArray(this.options)) {
           let idx = 0, len = this.options.length
           let loop = () => {
-            console.log(idx, len)
+            // console.log(idx, len)
             this.chart.setOption(this.options[idx])
             idx++
             if (idx >= len) idx = 0

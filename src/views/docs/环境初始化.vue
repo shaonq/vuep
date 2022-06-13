@@ -20,7 +20,7 @@
             <li><code>Auto Close Tag</code> 一 自动添加结束标签</li>
             <li><code>IntelliJ IDEA Keybindings</code> 一 <code>IntelliJ</code>风格快捷键</li>
           </ol>
-          <blockquote>推荐登录账号同步插件 , <code>vscode</code>,<code>git</code>,<code>nodejs</code> 安装在系统盘</blockquote>
+          <blockquote>推荐登录账号同步插件 、 <code>vscode</code>,<code>git</code>,<code>nodejs</code> 安装在系统盘</blockquote>
         </li>
         <li>
           <a href="https://pc.qq.com/detail/13/detail_22693.html"><code>Git</code>下载地址</a>

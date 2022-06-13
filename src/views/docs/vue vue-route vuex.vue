@@ -13,19 +13,24 @@
       </li>
     </ul>
     <pre><code class="language-javascript">
+<span style="color:#ff4e20">vue3.x 兼容，但是不建议使用</span>
 export default {
   /** * data : 可用的数据，模板中的数据必须预定义 */
   data(){ 
     return { a:1, b:2 }
-     },
+  },
   /** * computed： 自动计算，计算阶段的数据可以出现在模板中 */
   computed:{ 
     count(){ return this.a + this.b }
-     },
+ },
   /** * 数据计算完毕，但是未渲染模板 this.$refs还未生成 */
-  created(){ 
+ <span style="color:#ff4e20"> (vue3 change : created -> setup)(){ 
     this.dataInit()
-     },
+    return {
+      c:1
+    }
+  },
+  </span>
   /** * 书写模板中和当前生命周期中可用的方法 */
   methods:{ 
     dataInit(){ console.log('我是请求数据等操作') 
@@ -46,6 +51,7 @@ export default {
       </li>
     </ul>
     <pre><code class="language-javascript">
+<span style="color:#ff4e20">vue3.x vueRoute4 api不再适用</span>
  { path: '/** 路由访问地址 */',
    component: function(){return import('/* 引入 vue 文件地址 */')},
    name:'/** 路由名称 */',
@@ -60,6 +66,7 @@ export default {
       </li>
     </ul>
     <pre><code class="language-javascript">
+<span style="color:#ff4e20">vue3.x 使用 pinia 代替</span>
 const store = new Vuex.Store({
   /** * state : 全局 this.$store.state 只读 */
   state: {
