@@ -1,11 +1,12 @@
-import { defineStore } from 'pinia'
+import { createPinia } from 'pinia'
 
-export const useIndexStore = defineStore({
-  id: 'main',
-  state: () => ({
-    name: 'pinia',
-    token: 'SYS_TOKEN',
-  }),
-  getters: {},
-  actions: {},
-})
+const store = createPinia()
+
+export { store }
+
+export * from './modules/notification'
+export * from './modules/permission'
+export * from './modules/user'
+export * from './modules/tabs-router'
+
+export default store

@@ -2,7 +2,7 @@
   <div>
     <div class="u-quill-body">
       <h1></h1>
-      <div class="u-scroll" style="max-height: 300px; padding-right: 10px">
+      <div class="u-scroll" style="max-height: 600px; padding-right: 10px">
         <div>
           <table class="xlsx">
             <tr>
@@ -15,7 +15,7 @@
               <th>G</th>
               <th>H</th>
             </tr>
-            <tr v-for="(item, index) in list.value" :key="index">
+            <tr v-for="(item, index) in list" :key="index">
               <th>{{ index + 1 }}</th>
               <td v-for="(self, i) in item" :key="i">{{ self }}</td>
             </tr>
@@ -23,45 +23,35 @@
         </div>
       </div>
 
-      <a class="u-btn u-btn--blue u-mt" @click="exportXLSX()">导出xlsx</a>
+      <a class="u-btn u-btn--blue u-mt" @click="exportXLSX(list)">导出xlsx</a>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import shaonq from 'shaonq'
-import { defineComponent, reactive, onMounted } from 'vue'
-
+import { defineComponent, ref, reactive, onMounted } from 'vue'
+import { http } from '@/utils/request'
 export default defineComponent({
   setup() {
-    const list = reactive([])
+    const list = ref([])
     onMounted(async () => {
-      await shaonq.loadJs('http://mockjs.com/dist/mock.js')
-      let time = +new Date()
-      let data = Mock.mock({
-        'list|50': [
-          {
-            no: 'BH00@natural(01, 100)',
-            name: '@city()',
-            'paymentType|1': '@natural(0, 1)',
-            'contractType|1': '@natural(0, 2)',
-            updateTime: '2020-05-30',
-            amount: '@natural(10, 500),000',
-            adminName: '@cname()',
-          },
-        ],
-      })
-      list.value = data.list
+      try {
+        const res = await http.get('/api/get-table-list')
+        list.value = res.list
+      } catch (e) {
+        console.error(e)
+      }
     })
     return {
       list,
-      async exportXLSX() {
-        let data = Object.assign([], this.list).map((obj) => Object.values(obj))
+      async exportXLSX(list) {
+        let data = Object.assign([], list).map((obj) => Object.values(obj))
         try {
           if (typeof XLSX === 'undefined') {
             console.time('xlsx v0.16.8')
             // @demo:https://sheetjs.com/demo/manifest.html
-            await shaonq.loadJs('https://cdn.staticfile.org/xlsx/0.16.8/xlsx.full.min.js')
+            await shaonq.loadJs('https://unpkg.com/xlsx@0.16.8/dist/xlsx.full.min.js')
             console.timeEnd('xlsx v0.16.8')
           }
           // 设置表格样式，!cols为列宽

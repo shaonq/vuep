@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHistory, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 //** 中文转码 */
 const toUnicode = (string = '', prefix = '') =>
   string
@@ -43,6 +43,7 @@ const vueRouters = vuePathNames.map((path) => {
     children,
   }
 }) as RouteRecordRaw[]
+
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
@@ -53,10 +54,13 @@ const routes: RouteRecordRaw[] = [
   },
 ]
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(import.meta.env.BASE_URL),
   routes,
   linkActiveClass: 'is-active',
   linkExactActiveClass: 'is-exact-active',
 })
+
+const asyncRouterList: RouteRecordRaw[] = []
+export { asyncRouterList }
 
 export default router

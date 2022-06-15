@@ -115,9 +115,12 @@ yarn build   # 编译项目
   </div>
 </template>
 <script>
-export default {
-  mounted() {
-    // 代码高亮
+import { defineComponent, ref, onMounted } from 'vue'
+
+export default defineComponent({
+  setup() {
+    
+    return {}
   },
-}
+})
 </script>

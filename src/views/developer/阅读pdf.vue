@@ -6,11 +6,13 @@
         <div class="u-flex__item"><input class="u-input" placeholder="请输入一个在线地址" v-model="value" /></div>
         <div><button class="u-btn u-ml" @click="loadDemo()">在线查看</button></div>
       </div>
-      <div class="u-skeleton is-loading" v-if="loading">
-        <p class="u-skeleton__item" v-for="i in 10" :key="i"></p>
+      <div style="min-height: 600px">
+        <div class="u-skeleton is-loading" v-if="loading === true">
+          <p class="u-skeleton__item" v-for="i in 10" :key="i"></p>
+        </div>
+        <!-- pdf view -->
+        <div v-show="!loading" id="view"></div>
       </div>
-      <!-- pdf view -->
-      <div id="view"></div>
     </div>
   </div>
 </template>
@@ -21,12 +23,11 @@ import { defineComponent, ref, onMounted } from 'vue'
 export default defineComponent({
   setup() {
     const value = ref('https://shaonq.github.io/md/file/如何快速实现网页预览PDF文件.pdf')
-    const loading = ref(true)
+    const loading = ref(null)
     async function loadPdfPath(el, path) {
-      el.innerHTML = ''
-      if (typeof pdfjsLib === 'undefined') {
+      if (!window.pdfjsLib) {
         console.time('pdfjs v2.5.207')
-        await shaonq.loadJs('https://unpkg.com/pdfjs-dist@2.5.207/build/pdf.min.js')
+        await shaonq.loadJs('https://unpkg.com/pdfjs-dist@2.5.207/build/pdf.js')
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://unpkg.com/pdfjs-dist@2.5.207/build/pdf.worker.js'
         console.timeEnd('pdfjs v2.5.207')
       }
@@ -68,19 +69,18 @@ export default defineComponent({
       })
     }
     async function loadDemo() {
+      loading.value = true
       try {
         let el = document.getElementById('view')
-        let page = await loadPdfPath(el, this.value)
+        let page = await loadPdfPath(el, value.value)
         shaonq.showNearby({ content: `加载了一个 ${page} 页的pdf文件`, offset: ['100px', 'auto'] })
         loading.value = false
       } catch (error) {
-        loading.value = true
+        console.log(error)
       }
     }
 
-    onMounted(async () => {
-      await loadDemo()
-    })
+    // onMounted(async () => { await loadDemo()    })
     return {
       value,
       loading,
