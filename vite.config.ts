@@ -4,7 +4,6 @@ import vue from '@vitejs/plugin-vue'
 import path from 'path'
 // @ts-ignore
 // import viteCompression from 'vite-plugin-compression'
-
 function configMockPlugin(isBuild: boolean) {
   // mock api:https://github.com/vbenjs/vite-plugin-mock/blob/HEAD/README.zh_CN.md
   return viteMockServe({
@@ -16,6 +15,7 @@ function configMockPlugin(isBuild: boolean) {
        import { setupProdMockServer } from '../mock/_createProductionServer';
        setupProdMockServer();
        `,
+    // injectFile: path.resolve(__dirname, './src/main.ts'),
   })
 }
 
