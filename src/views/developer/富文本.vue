@@ -59,7 +59,7 @@ export default {
             ok: {
               label: '确认',
               onclick: (index, that) => {
-                let value = util.dom.el('input', that.parentNode.parentNode).value
+                const value = util.dom.el('input', that.parentNode.parentNode).value
                 if (util.regexp.url.test(value)) {
                   insert(value)
                   util.hideToast(index)
@@ -82,7 +82,7 @@ export default {
             ok: {
               label: '确认',
               onclick: (index, that) => {
-                let value = util.dom.el('input', that.parentNode.parentNode).value
+                const value = util.dom.el('input', that.parentNode.parentNode).value
                 if (util.regexp.image.test(value)) {
                   insert(value)
                   util.hideToast(index)

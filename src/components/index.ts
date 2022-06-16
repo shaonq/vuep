@@ -6,8 +6,8 @@ import Charts from './componentChart.vue'
 export default {
   install(app: any) {
     app.component('Gantt', Gantt)
-    app.component('u-full-calendar', FullCalendar)
-    app.component('u-quill', Quill)
-    app.component('u-chart', Charts)
+    app.component('UFullCalendar', FullCalendar)
+    app.component('UQuill', Quill)
+    app.component('UChart', Charts)
   },
 }

@@ -55,7 +55,7 @@ $red: #f43;
     &.is-start,
     &.is-end {
       &::before {
-        content: "";
+        content: '';
       }
     }
 
@@ -78,7 +78,7 @@ $red: #f43;
       &,
       &week {
         &:before {
-          content: "\4F11";
+          content: '\4F11';
           position: absolute;
           left: 0;
           top: 0;
@@ -96,7 +96,7 @@ $red: #f43;
       }
 
       &week:before {
-        content: "\73ED";
+        content: '\73ED';
         background: #555;
       }
     }

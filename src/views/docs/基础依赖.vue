@@ -12,11 +12,13 @@
       <pre v-if="tabName === 'b'">
  .u-tabs .u-tabs__item
  .u-tabs .u-tabs__item.is-active
-        </pre>
+        </pre
+      >
       <pre v-else>
  Tab
  需要需要使用vm.data 配合 v-if 来使用
-        </pre>
+        </pre
+      >
     </div>
     <div class="u-quill-body">
       <h1>Button</h1>
@@ -51,7 +53,7 @@
           <div class="u-field">
             <h3 class="u-field__label">修改图片</h3>
             <div class="u-field__content">
-              <img src="https://imgs.aixifan.com/jy9Gvt7hIk-iYn2Qf-iyUvai-zMf2ya-qeeeea.jpg" @click="shaonq.showImageView($event.target)" style="margin: 0; width: 100%" />
+              <img src="https://imgs.aixifan.com/jy9Gvt7hIk-iYn2Qf-iyUvai-zMf2ya-qeeeea.jpg" style="margin: 0; width: 100%" @click="shaonq.showImageView($event.target)" />
               <button class="u-btn u-field__hover u-btn--link u-btn--blue">修改</button>
             </div>
           </div>
@@ -60,8 +62,8 @@
             <div class="u-field__content">
               <div style="max-height: 300px" class="u-scroll">
                 <img
-                  @click="shaonq.showImageView($event.target)"
                   src="https://nim-nosdn.netease.im/MTY3OTkxNjk=/bmltYV8xODI1MjY3MzQ5NV8xNjI4ODIxMzAxNDU2XzVmMDc4OWRlLTAzMzAtNGRmMi1iYzY2LTU2OWEwYTZiYTExMA==?createTime=1628821301390"
+                  @click="shaonq.showImageView($event.target)"
                 />
               </div>
             </div>
@@ -147,17 +149,17 @@
       </div>
       <h1>弹窗使用和演示</h1>
       <div>
-        <button class="u-btn" @click="shaonq.toast('提示')" aria-label="toast" tooltip="top">提示</button>
-        <button class="u-btn" @click="showLoading" aria-label="showLoading" tooltip="top">加载中</button>
-        <button class="u-btn" @click="shaonq.hideToast()" aria-label="hideToast" tooltip="top">关闭其他</button>
-        <button class="u-btn" @click="uploadAvatar" aria-label="uploadAvatar" tooltip="top">上传头像</button>
-        <button class="u-btn" @click="shaonq.toast('右键点击看效果')" @contextmenu.prevent="showContextMenu" aria-label="showContextMenu" tooltip="top">右键菜单</button>
-        <button class="u-btn" @click="showDropdown" aria-label="showDropdown" tooltip="top">下拉菜单</button>
+        <button class="u-btn" aria-label="toast" tooltip="top" @click="shaonq.toast('提示')">提示</button>
+        <button class="u-btn" aria-label="showLoading" tooltip="top" @click="showLoading">加载中</button>
+        <button class="u-btn" aria-label="hideToast" tooltip="top" @click="shaonq.hideToast()">关闭其他</button>
+        <button class="u-btn" aria-label="uploadAvatar" tooltip="top" @click="uploadAvatar">上传头像</button>
+        <button class="u-btn" aria-label="showContextMenu" tooltip="top" @click="shaonq.toast('右键点击看效果')" @contextmenu.prevent="showContextMenu">右键菜单</button>
+        <button class="u-btn" aria-label="showDropdown" tooltip="top" @click="showDropdown">下拉菜单</button>
       </div>
       <div class="u-mt">
-        <button class="u-btn" @click="shaonq.alert('十步杀一人，千里不留行。<br> 事了拂衣去，深藏身与名。')" aria-label="toast" tooltip="top">侠客行</button>
-        <button class="u-btn" @click="confirmInfo()" aria-label="toast" tooltip="top">确认信息</button>
-        <button class="u-btn" @click="deleteInfo()" aria-label="toast" tooltip="top">删除提示</button>
+        <button class="u-btn" aria-label="toast" tooltip="top" @click="shaonq.alert('十步杀一人，千里不留行。<br> 事了拂衣去，深藏身与名。')">侠客行</button>
+        <button class="u-btn" aria-label="toast" tooltip="top" @click="confirmInfo()">确认信息</button>
+        <button class="u-btn" aria-label="toast" tooltip="top" @click="deleteInfo()">删除提示</button>
       </div>
       <pre class="line-numbers"><code class="language-javascript">
         
@@ -220,7 +222,7 @@ util.uploadAvatar(option)
       <hr />
       <p>骨架 <code>u-skeleton</code></p>
       <div class="u-skeleton is-loading">
-        <li class="u-skeleton__item" v-for="i in 4" :key="i" :style="{ width: i > 1 ? '100%' : '60%' }"></li>
+        <li v-for="i in 4" :key="i" class="u-skeleton__item" :style="{ width: i > 1 ? '100%' : '60%' }"></li>
       </div>
       <p class="u-mt">过渡动画</p>
       <code class="u-mr">u-loading</code>
@@ -237,22 +239,22 @@ util.uploadAvatar(option)
 <script>
 import shaonq from 'shaonq'
 export default {
-  data() {
-    return {
-      tabName: 'a',
-    }
-  },
   setup() {
     return {
       shaonq: shaonq,
     }
   },
+  data() {
+    return {
+      tabName: 'a',
+    }
+  },
   methods: {
     showLoading() {
       shaonq.showLoading('0%')
-      let now = +new Date()
-      let timer = setInterval(() => {
-        let v = Math.ceil(((new Date() - now) / 1000) * 100)
+      const now = +new Date()
+      const timer = setInterval(() => {
+        const v = Math.ceil(((new Date() - now) / 1000) * 100)
         if (v >= 100) {
           clearInterval(timer)
           shaonq.showSuccess('加载成功')
@@ -273,7 +275,7 @@ export default {
       })
     },
     showContextMenu(e) {
-      let p = shaonq.dom.position(e.target)
+      const p = shaonq.dom.position(e.target)
       shaonq.showContextMenu({
         offset: [p.top + p.height + 'px', e.pageX + 'px'],
         list: [
@@ -291,7 +293,7 @@ export default {
       })
     },
     showDropdown(e) {
-      let p = shaonq.dom.position(e.target)
+      const p = shaonq.dom.position(e.target)
       shaonq.showDropdown({
         offset: [p.top + p.height + 'px', p.left + 'px'],
         list: [

@@ -3,12 +3,12 @@
     <div class="u-quill-body">
       <h1>在线阅读pdf</h1>
       <div class="u-flex">
-        <div class="u-flex__item"><input class="u-input" placeholder="请输入一个在线地址" v-model="value" /></div>
+        <div class="u-flex__item"><input v-model="value" class="u-input" placeholder="请输入一个在线地址" /></div>
         <div><button class="u-btn u-ml" @click="loadDemo()">在线查看</button></div>
       </div>
       <div style="min-height: 600px">
-        <div class="u-skeleton is-loading" v-if="loading === true">
-          <p class="u-skeleton__item" v-for="i in 10" :key="i"></p>
+        <div v-if="loading === true" class="u-skeleton is-loading">
+          <p v-for="i in 10" :key="i" class="u-skeleton__item"></p>
         </div>
         <!-- pdf view -->
         <div v-show="!loading" id="view"></div>
@@ -35,12 +35,12 @@ export default defineComponent({
         pdfjsLib
           .getDocument(path)
           .promise.then((pdf) => {
-            let curr = 1,
+            const curr = 1,
               numPages = pdf.numPages
-            let loadPdfPage = (pageNumber) => {
+            const loadPdfPage = (pageNumber) => {
               return pdf.getPage(pageNumber).then(function (pdfPage) {
                 // Display page on the existing canvas with 100% scale.
-                let viewport = pdfPage.getViewport({ scale: 2 })
+                const viewport = pdfPage.getViewport({ scale: 2 })
                 let canvas = document.createElement('canvas')
                 canvas.width = viewport.width || 794
                 canvas.height = viewport.height || 1123
@@ -49,17 +49,19 @@ export default defineComponent({
                 canvas.style.marginBottom = '5px'
                 canvas.style.borderRadius = '2px'
                 canvas.style.display = 'block'
-                let ctx = canvas.getContext('2d')
-                let renderTask = pdfPage.render({ canvasContext: ctx, viewport: viewport })
+                const ctx = canvas.getContext('2d')
+                const renderTask = pdfPage.render({ canvasContext: ctx, viewport: viewport })
                 el.appendChild(canvas)
                 canvas = null
                 return renderTask.promise
               })
             }
-            let init = (curr) => {
+            const init = (curr) => {
               loadPdfPage(curr).then(() => {
                 curr++
-                if (numPages >= curr) init(curr)
+                if (numPages >= curr) {
+                  init(curr)
+                }
               })
             }
             init(curr)
@@ -71,8 +73,8 @@ export default defineComponent({
     async function loadDemo() {
       loading.value = true
       try {
-        let el = document.getElementById('view')
-        let page = await loadPdfPath(el, value.value)
+        const el = document.getElementById('view')
+        const page = await loadPdfPath(el, value.value)
         shaonq.showNearby({ content: `加载了一个 ${page} 页的pdf文件`, offset: ['100px', 'auto'] })
         loading.value = false
       } catch (error) {

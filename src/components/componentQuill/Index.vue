@@ -1,6 +1,6 @@
 <template>
   <div class="u-quill">
-    <div class="u-quill-toolbar" ref="toolbarEl" v-show="!readonly">
+    <div v-show="!readonly" ref="toolbarEl" class="u-quill-toolbar">
       <template v-if="!readonly">
         <button class="ql-bold" title="粗体(Ctrl+B)" type="button">&#xe6d9;</button>
         <button class="ql-italic" title="斜体 (Ctrl+I)" type="button">&#xe6f8;</button>
@@ -45,40 +45,26 @@
 import Quill from './main.js'
 export default {
   props: ['readonly', 'html', 'type', 'handlers'],
-  watch: {
-    html(html) {
-      this.setHtml(html)
-    },
-  },
   computed: {
     isHandlers() {
       return !!Object.keys(this.handlers).length
     },
   },
-  methods: {
-    setHtml(html) {
-      let { type, quill } = this
-      if (type === 'html') quill.pasteHTML(html)
-      else if (type === 'json') {
-        try {
-          if (typeof html !== 'object') html = JSON.parse(html)
-          quill.setContents(html)
-        } catch (error) {
-          quill.setText(html)
-        }
-      } else quill.setText(html)
+  watch: {
+    html(html) {
+      this.setHtml(html)
     },
   },
   mounted() {
     const { editorEl, toolbarEl } = this.$refs
-    let html = this.html || editorEl.innerText
+    const html = this.html || editorEl.innerText
     const quill = (this.quill = new Quill(editorEl, {
       modules: {
         toolbar: {
           container: toolbarEl,
           handlers: {
             clear: (btnValue) => {
-              var range = quill.getSelection()
+              const range = quill.getSelection()
               quill.removeFormat(range.index, range.length)
             },
             divider: (btnValue) => {
@@ -93,7 +79,7 @@ export default {
             //   );
             // },
             image: (btnValue) => {
-              let { index } = quill.getSelection()
+              const { index } = quill.getSelection()
               // image
               this.handlers.image((src) => {
                 quill.insertEmbed(index, 'figure', `<img src="${src}">`)
@@ -102,10 +88,10 @@ export default {
               })
             },
             link: (btnValue) => {
-              let { index } = quill.getSelection()
+              const { index } = quill.getSelection()
               // this.handlers.link(val => quill.insertEmbed(index, "figure", `<a href="${val}" target="_balnk">${val}</a>`))
               this.handlers.link((val) => {
-                let range = quill.getSelection(true)
+                const range = quill.getSelection(true)
                 quill.insertEmbed(range.index, 'newLink', { href: val, innerText: val }, 'api')
                 quill.setSelection(range.index + val.length)
               })
@@ -116,7 +102,9 @@ export default {
       readOnly: this.readonly,
       placeholder: '请输入内容',
     }))
-    if (html) this.setHtml(html)
+    if (html) {
+      this.setHtml(html)
+    }
     // Event
     quill.on('text-change', (range) => {
       // let text = quill.getText().replace(/\s/g, "");
@@ -124,8 +112,11 @@ export default {
       if (this.type === 'json') {
         const json = quill.getContents()
         this.$emit('change', JSON.stringify(json), quill)
-      } else if (this.type === 'html') this.$emit('change', quill.root.innerHTM, quill)
-      else this.$emit('change', quill.getText(), quill)
+      } else if (this.type === 'html') {
+        this.$emit('change', quill.root.innerHTM, quill)
+      } else {
+        this.$emit('change', quill.getText(), quill)
+      }
       // let outerText = this.type === "html" ? html : text;
       // if (!text) outerText = text;
       // this.$emit("change", outerText, quill);
@@ -138,6 +129,25 @@ export default {
     // quill.keyboard.addBinding({ key: 46 }, (range, context) => { console.log(range, context) });
     // debug
     //window.quill = quill;
+  },
+  methods: {
+    setHtml(html) {
+      const { type, quill } = this
+      if (type === 'html') {
+        quill.pasteHTML(html)
+      } else if (type === 'json') {
+        try {
+          if (typeof html !== 'object') {
+            html = JSON.parse(html)
+          }
+          quill.setContents(html)
+        } catch (error) {
+          quill.setText(html)
+        }
+      } else {
+        quill.setText(html)
+      }
+    },
   },
 }
 </script>

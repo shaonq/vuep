@@ -316,6 +316,7 @@ export const useMainStore = defineStore({
 ## vite 常用插件
 
 > 可以查看官方文档：https://vitejs.cn/plugins/
+
 - `@vitejs/plugin-vue` 提供 `Vue 3` 单文件组件支持
 - `@vitejs/plugin-vue-jsx` 提供 Vue 3 `JSX` 支持（通过 专用的 Babel 转换插件）
 - `@vitejs/plugin-legacy` 为打包后的文件提供传统浏览器`兼容性`支持

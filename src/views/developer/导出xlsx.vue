@@ -46,7 +46,7 @@ export default defineComponent({
     return {
       list,
       async exportXLSX(list) {
-        let data = Object.assign([], list).map((obj) => Object.values(obj))
+        const data = Object.assign([], list).map((obj) => Object.values(obj))
         try {
           if (typeof XLSX === 'undefined') {
             console.time('xlsx v0.16.8')

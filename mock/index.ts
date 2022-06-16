@@ -56,7 +56,6 @@ export default [
       },
     }),
   },
-  ,
   {
     url: '/api/get-calendar-list',
     method: 'get',

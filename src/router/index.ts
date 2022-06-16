@@ -15,7 +15,7 @@ const vueRouters = vuePathNames.map((path) => {
   const keys = Object.keys(vuePaths).filter((i) => ~i.indexOf(`/views/${path}/`)) // && !~i.indexOf('Index.vue')
   const list: vuePath[] = keys
     .map((name: string) => {
-      let _name = name.split('/').slice(-1)[0].slice(0, -4)
+      const _name = name.split('/').slice(-1)[0].slice(0, -4)
       return {
         path: toUnicode(_name),
         name: _name,
@@ -27,8 +27,10 @@ const vueRouters = vuePathNames.map((path) => {
   let component
   const children = list
     .filter((i) => {
-      let is = i.path === 'Index'
-      if (is) component = i.component
+      const is = i.path === 'Index'
+      if (is) {
+        component = i.component
+      }
       return ~is
     })
     .map((item, index) => {

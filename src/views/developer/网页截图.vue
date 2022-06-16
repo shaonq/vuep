@@ -8,7 +8,7 @@
           <li><code>jspdf.js</code> 图片转换为pdf文件</li>
         </ol>
         <hr />
-        <img @click="imageView" src="https://imgs.aixifan.com/jy9Gvt7hIk-iYn2Qf-iyUvai-zMf2ya-qeeeea.jpg" />
+        <img src="https://imgs.aixifan.com/jy9Gvt7hIk-iYn2Qf-iyUvai-zMf2ya-qeeeea.jpg" @click="imageView" />
         <hr />
         <p @click="$util.toast('123')">点击测试↓</p>
       </div>
@@ -27,34 +27,34 @@ export default {
     return {
       // 截取el内部内容
       captureCanvas({ el, success }) {
-        let dom = shaonq.dom
-        let { loadJs } = shaonq
+        const dom = shaonq.dom
+        const { loadJs } = shaonq
         ;(async function () {
           if (typeof html2canvas === 'undefined') {
             console.time('html2canvas v1.0.0-rc.7')
             await loadJs('https://unpkg.com/html2canvas@1.0.0-rc.7/dist/html2canvas.min.js')
             console.timeEnd('html2canvas v1.0.0-rc.7')
           }
-          let p = dom.position(el)
+          const p = dom.position(el)
           // @bug offset
           window.scrollTo(p.pageXOffset, p.top)
-          let canva = document.createElement('canvas')
-          let dpi = window.devicePixelRatio || 1
-          let w = p.width * dpi
-          let h = p.height * dpi
-          let scale = 2
+          const canva = document.createElement('canvas')
+          const dpi = window.devicePixelRatio || 1
+          const w = p.width * dpi
+          const h = p.height * dpi
+          const scale = 2
           canva.width = w * scale
           canva.height = h * scale
           canva.style.width = w + 'px'
           canva.style.height = h + 'px'
-          let ctx = canva.getContext('2d')
+          const ctx = canva.getContext('2d')
           ctx.scale(scale, scale)
           html2canvas(el, { canvas: canva, background: '#FFFFFF', scrollY: 0, scrollX: 0, width: w, height: h, useCORS: true }).then(success)
         })()
       },
       // 生成pdf
       createPDF({ canvas, pdfName }) {
-        let { loadJs } = shaonq
+        const { loadJs } = shaonq
         ;(async function () {
           console.time('create pdf')
           if (typeof jsPDF === 'undefined') {
@@ -63,19 +63,23 @@ export default {
             console.timeEnd('jspdf v1.3.1')
           }
           // px 转 9pt
-          let a4pt = { width: 594.3, height: 840.51 }
-          let allHeight = canvas.height * (a4pt.width / canvas.width)
-          let pdfWidth = a4pt.width
-          let pdfheight = a4pt.height
-          let base64 = canvas.toDataURL('image/jpeg', 0.83)
-          let pageCount = Math.ceil(allHeight / pdfheight)
+          const a4pt = { width: 594.3, height: 840.51 }
+          const allHeight = canvas.height * (a4pt.width / canvas.width)
+          const pdfWidth = a4pt.width
+          const pdfheight = a4pt.height
+          const base64 = canvas.toDataURL('image/jpeg', 0.83)
+          const pageCount = Math.ceil(allHeight / pdfheight)
           let pdf = new jsPDF('', 'pt', 'a4')
           for (let page = 1; page <= pageCount; page++) {
-            let top = -(page - 1) * pdfheight
+            const top = -(page - 1) * pdfheight
             // 最后一页如果小于5px，则跳过打印
-            if (pdfheight - (page * pdfheight - allHeight) < 5) return
+            if (pdfheight - (page * pdfheight - allHeight) < 5) {
+              return
+            }
             pdf.addImage(base64, 'JPEG', 0, top, pdfWidth, allHeight)
-            if (page !== pageCount) pdf.addPage()
+            if (page !== pageCount) {
+              pdf.addPage()
+            }
           }
           // @todo debug
           // let a = document.createElement('a');
@@ -90,14 +94,14 @@ export default {
       },
       // 查看截图
       appendCanvas() {
-        let dom = shaonq.dom
-        let el = dom.el('#qq')
-        let p = dom.position(el)
+        const dom = shaonq.dom
+        const el = dom.el('#qq')
+        const p = dom.position(el)
         this.captureCanvas({
           el,
           success: (canvas) => {
-            let src = canvas.toDataURL('image/jpeg', 0.83)
-            let img = new Image()
+            const src = canvas.toDataURL('image/jpeg', 0.83)
+            const img = new Image()
             img.src = src
             img.onload = () => dom.append(img, dom.el('#qq'))
             dom.on(img, 'click', this.imageView)
@@ -106,8 +110,8 @@ export default {
       },
       // 下载内容
       downloadPDF() {
-        let dom = shaonq.dom
-        let el = dom.el('#qq')
+        const dom = shaonq.dom
+        const el = dom.el('#qq')
         this.captureCanvas({
           el,
           success: (canvas) => {

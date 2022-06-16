@@ -22,7 +22,7 @@
       >
       <hr />
       <blockquote>topology-bundle cdn demo</blockquote>
-      <div style="height: 300px; border: 1px solid #e1e1e1; position: relative" id="l5l"></div>
+      <div id="l5l" style="height: 300px; border: 1px solid #e1e1e1; position: relative"></div>
     </div>
   </div>
 </template>
@@ -40,7 +40,9 @@ export default {
       }
       const canvas = new Le5leTopology.Topology('l5l', {
         on(event, data) {
-          if (data) console.log('onMessage', event, data)
+          if (data) {
+            console.log('onMessage', event, data)
+          }
         },
       })
       canvas.open({

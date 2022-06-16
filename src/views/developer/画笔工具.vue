@@ -4,7 +4,7 @@
     <div class="u-card">
       <div class="u-card__hd">
         <cite class="u-card__title u-flex__item">画笔工具</cite>
-        <div title="清除画板" @click="hb.clearCanvas(true)" class="rubber">
+        <div title="清除画板" class="rubber" @click="hb.clearCanvas(true)">
           <svg t="1633922835611" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5534" width="32" height="32">
             <path d="M584.7 768.3L246.2 429.8 577.6 98.5c3.9-3.9 10.2-3.9 14.1 0L916 422.8c3.9 3.9 3.9 10.2 0 14.1L584.7 768.3z" fill="#51B5ED" p-id="5535"></path>
             <path d="M880.8 387.5L821 327.7c23.4 23.4 23.4 61.2 0 84.6L524.9 708.5l59.8 59.8 296.1-296.1c23.4-23.4 23.4-61.3 0-84.7z" fill="#2996D3" p-id="5536"></path>
@@ -18,10 +18,10 @@
             ></path>
           </svg>
         </div>
-        <div :style="{ background: color, color: color }" v-for="(color, index) in colors" :class="{ active: colorsIndex === index }" :key="index" @click="setColorIndex(index)" class="u-ml dot"></div>
+        <div v-for="(color, index) in colors" :key="index" :style="{ background: color, color: color }" :class="{ active: colorsIndex === index }" class="u-ml dot" @click="setColorIndex(index)"></div>
       </div>
       <div class="u-card__bd" style="padding: 0; background: rgba(0, 0, 0, 0.01)">
-        <canvas style="height: 600px; width: 100%" ref="canvas"></canvas>
+        <canvas ref="canvas" style="height: 600px; width: 100%"></canvas>
       </div>
     </div>
   </div>
@@ -56,10 +56,13 @@ export default {
       colorsIndex: 0,
     }
   },
+  mounted() {
+    this.dataInit()
+  },
   methods: {
     // 截取el内部内容
     dataInit() {
-      let canvas = this.$refs.canvas
+      const canvas = this.$refs.canvas
       this.hb = new DrawingBoard({ canvas })
       this.setColorIndex(this.colors.length - 1)
     },
@@ -67,9 +70,6 @@ export default {
       this.colorsIndex = index
       this.hb.setColor(this.colors[index])
     },
-  },
-  mounted() {
-    this.dataInit()
   },
 }
 </script>

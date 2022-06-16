@@ -1,15 +1,15 @@
 <template>
-  <div class="u-gantt" ref="gantt">
+  <div ref="gantt" class="u-gantt">
     <!-- 头部区域 tbody -->
     <div class="u-gantt-head">
       <ul class="u-flex u-flex--start">
-        <li :style="{width:sideWidth+'px'}" class="is-clamp">
+        <li :style="{ width: sideWidth + 'px' }" class="is-clamp">
           <div class="u-gantt__scroll u-gantt---left">
             <table>
               <thead>
                 <tr class="u-gantt-rows">
-                  <td v-for="(item,index) in labelList" :style="{width:item.width+'px'}" :key="index">
-                    <div class="u-gantt-cell">{{item.label}}</div>
+                  <td v-for="(item, index) in labelList" :key="index" :style="{ width: item.width + 'px' }">
+                    <div class="u-gantt-cell">{{ item.label }}</div>
                   </td>
                 </tr>
               </thead>
@@ -21,9 +21,9 @@
             <table>
               <thead>
                 <tr class="u-gantt-bars">
-                  <td v-for="(a,dayIndex) in dateRangeDay" :key="dayIndex" :class="getDateWeekClass(getIndexDate(dayIndex))">
-                    <div class="u-gantt-cell ">
-                      <div v-text="headDateFromt(getIndexDate(dayIndex))" :title="getIndexDate(dayIndex)"></div>
+                  <td v-for="(a, dayIndex) in dateRangeDay" :key="dayIndex" :class="getDateWeekClass(getIndexDate(dayIndex))">
+                    <div class="u-gantt-cell">
+                      <div :title="getIndexDate(dayIndex)" v-text="headDateFromt(getIndexDate(dayIndex))"></div>
                     </div>
                   </td>
                 </tr>
@@ -34,16 +34,15 @@
       </ul>
     </div>
     <!-- 内区域 tbody -->
-    <div class="u-gantt-warp" style="height:calc(100% - 50px)">
+    <div class="u-gantt-warp" style="height: calc(100% - 50px)">
       <ul class="u-flex u-flex--start">
-        <li :style="{width:sideWidth+'px'}" class=" is-clamp">
-          <div class="u-gantt__scroll  u-gantt---left">
+        <li :style="{ width: sideWidth + 'px' }" class="is-clamp">
+          <div class="u-gantt__scroll u-gantt---left">
             <table>
               <tbody>
-
-                <tr class="u-gantt-rows" v-for="(item,index) in list" :key="index" @click="$emit('on-item-click',item,$event)">
-                  <td v-for="({value,width},i) in labelList" :style="{width:width+'px'}" :key="i">
-                    <div class="u-gantt-cell">{{item[value]}}</div>
+                <tr v-for="(item, index) in list" :key="index" class="u-gantt-rows" @click="$emit('on-item-click', item, $event)">
+                  <td v-for="({ value, width }, i) in labelList" :key="i" :style="{ width: width + 'px' }">
+                    <div class="u-gantt-cell">{{ item[value] }}</div>
                   </td>
                 </tr>
               </tbody>
@@ -51,20 +50,20 @@
           </div>
         </li>
         <li class="u-flex__item is-clamp">
-          <div class="u-gantt__scroll  u-gantt---right">
+          <div class="u-gantt__scroll u-gantt---right">
             <table>
               <tbody>
-                <tr class="u-gantt-bars" v-for="(item,rowIndex) in list" :key="rowIndex">
-                  <td v-for="(a,dayIndex) in dateRangeDay" :key="dayIndex" :class="getDateWeekClass(getIndexDate(dayIndex))">
-                    <div class="u-gantt-cell ">
-                      <template v-if="getIndexDate(dayIndex) ===getStringDate(item.startDate)">
+                <tr v-for="(item, rowIndex) in list" :key="rowIndex" class="u-gantt-bars">
+                  <td v-for="(a, dayIndex) in dateRangeDay" :key="dayIndex" :class="getDateWeekClass(getIndexDate(dayIndex))">
+                    <div class="u-gantt-cell">
+                      <template v-if="getIndexDate(dayIndex) === getStringDate(item.startDate)">
                         <!-- 渲染条目 bar 条形图 -->
-                        <div class="u-gantt-bar" :title="item.title+'\n'+item.startDate+'~'+item.endDate" :style="getBarStyle(item,dayIndex)">
-                          <div class="u-gantt-bar__title" @click="$emit('on-item-click',item,$event)">{{item.title}}</div>
+                        <div class="u-gantt-bar" :title="item.title + '\n' + item.startDate + '~' + item.endDate" :style="getBarStyle(item, dayIndex)">
+                          <div class="u-gantt-bar__title" @click="$emit('on-item-click', item, $event)">{{ item.title }}</div>
                         </div>
                         <!-- 世纪开始 -->
-                        <div class="u-gantt-actual" v-if="getActualStyle(item,dayIndex)" :style="getActualStyle(item,dayIndex)">
-                          <div class="u-gantt-actual__title">{{item.title}}</div>
+                        <div v-if="getActualStyle(item, dayIndex)" class="u-gantt-actual" :style="getActualStyle(item, dayIndex)">
+                          <div class="u-gantt-actual__title">{{ item.title }}</div>
                         </div>
                       </template>
                     </div>
@@ -79,14 +78,14 @@
     <!-- 下部滚动条 -->
     <div class="u-gantt-scroll">
       <ul class="u-flex u-flex--start">
-        <li :style="{width:sideWidth+'px'}" class="is-clamp">
+        <li :style="{ width: sideWidth + 'px' }" class="is-clamp">
           <div class="u-gantt__scroll" @scroll="scrollLeft">
-            <div style="height:0;">
+            <div style="height: 0">
               <table>
                 <thead>
                   <tr class="u-gantt-rows">
-                    <td v-for="(item,index) in labelList" :style="{width:item.width+'px'}" :key="index">
-                      <div class="u-gantt-cell">{{item.label}}</div>
+                    <td v-for="(item, index) in labelList" :key="index" :style="{ width: item.width + 'px' }">
+                      <div class="u-gantt-cell">{{ item.label }}</div>
                     </td>
                   </tr>
                 </thead>
@@ -96,13 +95,13 @@
         </li>
         <li class="u-flex__item is-clamp">
           <div class="u-gantt__scroll" @scroll="scrollRight">
-            <div style="height:0;">
+            <div style="height: 0">
               <table>
                 <thead>
                   <tr class="u-gantt-bars">
-                    <td v-for="(a,dayIndex) in dateRangeDay" :key="dayIndex" :class="getDateWeekClass(getIndexDate(dayIndex))">
-                      <div class="u-gantt-cell ">
-                        <div v-text="headDateFromt(getIndexDate(dayIndex))" :title="getIndexDate(dayIndex)"></div>
+                    <td v-for="(a, dayIndex) in dateRangeDay" :key="dayIndex" :class="getDateWeekClass(getIndexDate(dayIndex))">
+                      <div class="u-gantt-cell">
+                        <div :title="getIndexDate(dayIndex)" v-text="headDateFromt(getIndexDate(dayIndex))"></div>
                       </div>
                     </td>
                   </tr>
@@ -122,7 +121,7 @@ export default {
   props: {
     list: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     skin: String,
     labelList: {
@@ -130,24 +129,24 @@ export default {
       default: () => {
         return [
           {
-            label: "任务名称",
-            value: "title",
-            width: 150
+            label: '任务名称',
+            value: 'title',
+            width: 150,
           },
           {
-            label: "开始时间",
-            value: "startDate",
-            width: 90
+            label: '开始时间',
+            value: 'startDate',
+            width: 90,
           },
           {
-            label: "结束时间",
-            value: "endDate",
-            width: 90
+            label: '结束时间',
+            value: 'endDate',
+            width: 90,
           },
           // actualStartDate actualEndDate
         ]
-      }
-    }
+      },
+    },
   },
   data() {
     return {
@@ -155,17 +154,33 @@ export default {
         width: 33,
         height: 33,
       },
-      sideWidth: 360
-    };
+      sideWidth: 360,
+    }
   },
   computed: {
     // 计算时间
     dateRange() {
-      const date = shaonq.date;
-      let list = Object.assign([], this.list).map(({ startDate, endDate }) => [this.getDateNumber(startDate, true), this.getDateNumber(endDate, true)]);
-      let minDate = date.addDays(-1, date.toString(Math.min.apply(null, list.map(([a, b]) => a))));
-      let maxDate = date.addDays(1, date.toString(Math.max.apply(null, list.map(([a, b]) => b))));
-      return { minDate, maxDate, rangeDay: this.getDateDiff(maxDate, minDate) };
+      const date = shaonq.date
+      const list = Object.assign([], this.list).map(({ startDate, endDate }) => [this.getDateNumber(startDate, true), this.getDateNumber(endDate, true)])
+      const minDate = date.addDays(
+        -1,
+        date.toString(
+          Math.min.apply(
+            null,
+            list.map(([a, b]) => a)
+          )
+        )
+      )
+      const maxDate = date.addDays(
+        1,
+        date.toString(
+          Math.max.apply(
+            null,
+            list.map(([a, b]) => b)
+          )
+        )
+      )
+      return { minDate, maxDate, rangeDay: this.getDateDiff(maxDate, minDate) }
     },
     /**
      * 周期最小为30天
@@ -174,62 +189,79 @@ export default {
       return Math.max(this.dateRange.rangeDay, 30)
     },
   },
+  mounted() {
+    const dom = shaonq.dom
+    const $gantt = this.$refs.gantt
+    // 计算实际的高度
+    const offsetHeight = dom.el('.u-gantt-head', $gantt).offsetHeight + dom.el('.u-gantt-scroll', $gantt).offsetHeight
+    dom.el('.u-gantt-warp', $gantt).style.height = $gantt.offsetHeight - offsetHeight + 'px'
+    /**@debug */
+    // window.debug = this;
+  },
   methods: {
     getDateNumber(day, isNow) {
-      let time; try { time = shaonq.date.toDate(day) } catch (e) { };
-      if (!time) time = isNow ? new Date() : 0;
-      return +time;
+      let time
+      try {
+        time = shaonq.date.toDate(day)
+      } catch (e) {}
+      if (!time) {
+        time = isNow ? new Date() : 0
+      }
+      return +time
     },
     getDateDiff(endDate, startDate) {
-      const date = shaonq.date;
-      endDate = this.getStringDate(endDate);
-      startDate = this.getStringDate(startDate);
+      const date = shaonq.date
+      endDate = this.getStringDate(endDate)
+      startDate = this.getStringDate(startDate)
       // offset 1 day
-      return (date.toDate(endDate) - date.toDate(startDate)) / (24 * 3600 * 1000) + 1;
+      return (date.toDate(endDate) - date.toDate(startDate)) / (24 * 3600 * 1000) + 1
     },
     getIndexDate(index) {
-      return shaonq.date.addDays(index, this.getStringDate(this.dateRange.minDate));
+      return shaonq.date.addDays(index, this.getStringDate(this.dateRange.minDate))
     },
     getStringDate(date) {
-      if (!date) { return "" }
-      if (typeof date !== "string") return shaonq.date.toString(date);
-      return shaonq.date.toString(shaonq.date.toDate(date));
+      if (!date) {
+        return ''
+      }
+      if (typeof date !== 'string') {
+        return shaonq.date.toString(date)
+      }
+      return shaonq.date.toString(shaonq.date.toDate(date))
     },
     getDateWeekClass(date) {
-      let sat = shaonq.date.satOfWeek(date)
-      let sun = shaonq.date.sunOfWeek(date)
+      const sat = shaonq.date.satOfWeek(date)
+      const sun = shaonq.date.sunOfWeek(date)
       return {
-        "is-week": date === sat || date === sun
+        'is-week': date === sat || date === sun,
       }
     },
     headDateFromt(date) {
-      let day = +date.slice(-2);
+      const day = +date.slice(-2)
       return day
     },
     // 计划开始时间
     getBarStyle(item, dayIndex) {
       if (this.getDateNumber(item.startDate) && this.getDateNumber(item.endDate)) {
-        let diffday = this.getDateDiff(item.endDate, item.startDate);
+        const diffday = this.getDateDiff(item.endDate, item.startDate)
         return {
           width: this.dayPX.width * (diffday < 0 ? 0 : diffday) + 'px',
           height: this.dayPX.height + 'px',
-          left: this.dayPX.width * dayIndex + 'px'
+          left: this.dayPX.width * dayIndex + 'px',
         }
-      } else {
-        return false
       }
+      return false
     },
     getActualStyle(item, dayIndex) {
-      let actualStartDate = this.getDateNumber(item.actualStartDate);
-      let actualEndDate = this.getDateNumber(item.actualEndDate, true);
+      const actualStartDate = this.getDateNumber(item.actualStartDate)
+      const actualEndDate = this.getDateNumber(item.actualEndDate, true)
       if (actualStartDate) {
-        let diffDate = this.getDateDiff(actualEndDate, actualStartDate);
-        let diffMin = this.getDateDiff(actualStartDate, this.dateRange.minDate);
+        const diffDate = this.getDateDiff(actualEndDate, actualStartDate)
+        const diffMin = this.getDateDiff(actualStartDate, this.dateRange.minDate)
         if (diffDate > 0) {
           return {
             width: this.dayPX.width * diffDate + 'px',
             height: this.dayPX.height + 'px',
-            left: this.dayPX.width * diffMin + 'px'
+            left: this.dayPX.width * diffMin + 'px',
           }
         }
       }
@@ -237,30 +269,20 @@ export default {
     },
     // 滚动条
     scrollLeft(ev) {
-      let left = ev.target.scrollLeft;
-      shaonq.dom.els(".u-gantt---left", this.$refs.gantt).forEach(el => {
+      const left = ev.target.scrollLeft
+      shaonq.dom.els('.u-gantt---left', this.$refs.gantt).forEach((el) => {
         el.scrollLeft = left
-      });
+      })
     },
     scrollRight(ev) {
-      let left = ev.target.scrollLeft;
-      shaonq.dom.els(".u-gantt---right", this.$refs.gantt).forEach(el => {
+      const left = ev.target.scrollLeft
+      shaonq.dom.els('.u-gantt---right', this.$refs.gantt).forEach((el) => {
         el.scrollLeft = left
-      });
-    }
+      })
+    },
   },
-  mounted() {
-    const dom = shaonq.dom;
-    const $gantt = this.$refs.gantt;
-    // 计算实际的高度
-    let offsetHeight = dom.el(".u-gantt-head", $gantt).offsetHeight + dom.el(".u-gantt-scroll", $gantt).offsetHeight;
-    dom.el(".u-gantt-warp", $gantt).style.height = ($gantt.offsetHeight - offsetHeight) + 'px';
-    /**@debug */
-    // window.debug = this;
-  },
-};
+}
 </script>
-
 
 <style lang="scss">
 /** var */

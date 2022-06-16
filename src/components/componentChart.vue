@@ -345,6 +345,12 @@ export default {
       default() {},
     },
   },
+  data() {
+    return {
+      chart: null,
+      timer: false,
+    }
+  },
   watch: {
     options: {
       deep: true,
@@ -353,11 +359,9 @@ export default {
       },
     },
   },
-  data() {
-    return {
-      chart: null,
-      timer: false,
-    }
+  mounted() {
+    this.chart = echarts.init(this.$refs.dom, this.theme || theme, { renderer: this.renderer })
+    this.updateOptions()
   },
   methods: {
     updateOptions() {
@@ -366,13 +370,15 @@ export default {
         if (Array.isArray(this.options)) {
           let idx = 0,
             len = this.options.length
-          let loop = () => {
+          const loop = () => {
             // console.log(idx, len)
             this.chart.setOption(this.options[idx])
             idx++
             console.log(idx)
-            if (idx >= len) return
-            let time = this.options[idx - 1]?.series?.animationDurationUpdate || 500
+            if (idx >= len) {
+              return
+            }
+            const time = this.options[idx - 1]?.series?.animationDurationUpdate || 500
             this.timer = setTimeout(loop, time)
           }
           loop()
@@ -381,10 +387,6 @@ export default {
         }
       }
     },
-  },
-  mounted() {
-    this.chart = echarts.init(this.$refs.dom, this.theme || theme, { renderer: this.renderer })
-    this.updateOptions()
   },
 }
 </script>

@@ -1,41 +1,28 @@
-import { defineConfig } from 'vite'
+/* eslint-disable camelcase */
+import { defineConfig, UserConfig, ConfigEnv } from 'vite'
 import { viteMockServe } from 'vite-plugin-mock'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
-// @ts-ignore
-// import viteCompression from 'vite-plugin-compression'
-function configMockPlugin(isBuild: boolean) {
-  // mock api:https://github.com/vbenjs/vite-plugin-mock/blob/HEAD/README.zh_CN.md
-  return viteMockServe({
-    ignore: /^\_/,
-    mockPath: 'mock',
-    localEnabled: !isBuild,
-    prodEnabled: isBuild,
-    injectCode: `
-       import { setupProdMockServer } from '../mock/_createProductionServer';
-       setupProdMockServer();
-       `,
-    // injectFile: path.resolve(__dirname, './src/main.ts'),
-  })
-}
 
 // vite api: https://vitejs.dev/config/
-export default defineConfig(({ command }) => {
+export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
   const isBuild = command === 'build'
   return {
     /** base 通baseUrl , 默认 ./ */
     base: '/vue/',
     plugins: [
       vue(),
+      // import viteCompression from 'vite-plugin-compression'
       // gzip压缩 生产环境生成 .gz 文件
-      // viteCompression({
-      //   verbose: true,
-      //   disable: false,
-      //   threshold: 10240,
-      //   algorithm: 'gzip',
-      //   ext: '.gz',
-      // }),
-      configMockPlugin(isBuild),
+      // viteCompression({ verbose: true, disable: false, threshold: 10240, algorithm: 'gzip', ext: '.gz', }),
+      // mock api:https://github.com/vbenjs/vite-plugin-mock/blob/HEAD/README.zh_CN.md
+      viteMockServe({
+        ignore: /^_/, // 忽略_开头的文件
+        mockPath: 'mock', // mock根目录
+        localEnabled: !isBuild, // 是否启用本地mock
+        prodEnabled: isBuild, // 是否启用生产环境mock
+        injectCode: `import { setupProdMockServer } from '../mock/_createProductionServer'; setupProdMockServer();`,
+      }),
     ],
     resolve: {
       alias: {
@@ -52,7 +39,9 @@ export default defineConfig(({ command }) => {
             postcssPlugin: 'internal:charset-removal',
             AtRule: {
               charset: (atRule) => {
-                if (atRule.name === 'charset') atRule.remove()
+                if (atRule.name === 'charset') {
+                  atRule.remove()
+                }
               },
             },
           },

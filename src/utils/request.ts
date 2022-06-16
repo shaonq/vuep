@@ -31,7 +31,9 @@ instance.interceptors.response.use(
   async (err) => {
     const { config } = err
 
-    if (!config || !config.retry) return Promise.reject(err)
+    if (!config || !config.retry) {
+      return Promise.reject(err)
+    }
 
     config.retryCount = config.retryCount || 0
 
@@ -48,7 +50,7 @@ instance.interceptors.response.use(
     })
 
     await backOff
-    return await instance(config)
+    return instance(config)
   }
 )
 

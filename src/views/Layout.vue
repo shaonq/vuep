@@ -1,5 +1,5 @@
 <template>
-  <div class="layout-doc" id="root">
+  <div id="root" class="layout-doc">
     <header>
       <div class="layout-hd">
         <div class="layout-warp">

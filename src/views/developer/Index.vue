@@ -3,16 +3,16 @@
     <div class="layout-warp">
       <div class="u-flex u-flex--start">
         <div class="u-flex__item is-clamp">
-          <div class="u-card" ref="body">
+          <div ref="body" class="u-card">
             <router-view></router-view>
           </div>
         </div>
         <!-- 侧边栏目 -->
-        <div class="layout-side" ref="el">
+        <div ref="el" class="layout-side">
           <div class="u-card">
-            <div class="u-card__hd"><span style="font-size:15px">文章列表</span></div>
+            <div class="u-card__hd"><span style="font-size: 15px">文章列表</span></div>
             <div class="u-card__bd" style="padding: 8px 0">
-              <router-link custom v-slot="{ href, navigate, route, isExactActive }" v-for="(item, index) in list" :key="index" :to="item.path">
+              <router-link v-for="(item, index) in list" v-slot="{ href, navigate, route, isExactActive }" :key="index" custom :to="item.path">
                 <a draggable="false" class="u-dialog--dropdown-item" :class="{ 'is-active': isExactActive }" :href="href" @click="navigate"> {{ route.name }} </a>
               </router-link>
             </div>
@@ -32,10 +32,12 @@ export default defineComponent({
   setup() {
     const route = useRoute()
     const list = Object.assign([], route.matched)
-      .filter((i) => i.name == name)?.[0]
+      .filter((i) => i.name === name)?.[0]
       .children?.filter((i) => i.path !== 'Index')
       .map((item) => {
-        if (!~item.path.indexOf(`/${name}/`)) item.path = `/${name}/${item.path}`
+        if (!~item.path.indexOf(`/${name}/`)) {
+          item.path = `/${name}/${item.path}`
+        }
         return item
       })
     return { list }

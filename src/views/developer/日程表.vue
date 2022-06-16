@@ -26,7 +26,7 @@
 </code></pre>
       <h1>例子</h1>
     </div>
-    <u-full-calendar @on-init="dataInit" :list="list" :holiday="holiday" @on-day="onDay" @on-item="onItem" />
+    <u-full-calendar :list="list" :holiday="holiday" @on-init="dataInit" @on-day="onDay" @on-item="onItem" />
   </div>
 </template>
 <script>
@@ -42,7 +42,9 @@ export default defineComponent({
         fetch('https://timor.tech/api/holiday/year/' + date)
           .then((data) => data.json())
           .then((data) => {
-            if (data && data.code === 0) holiday.value = Object.values(data.holiday)
+            if (data && data.code === 0) {
+              holiday.value = Object.values(data.holiday)
+            }
           })
     }
     async function dataInit(startDate, endDate, today) {
