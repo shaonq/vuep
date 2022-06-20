@@ -11,28 +11,27 @@
           <p v-for="i in 10" :key="i" class="u-skeleton__item"></p>
         </div>
         <!-- pdf view -->
-        <div v-show="!loading" id="view"></div>
+        <div v-show="loading === false" id="view" class="pdfViewer"></div>
       </div>
     </div>
   </div>
 </template>
-
 <script lang="ts">
 import shaonq from 'shaonq'
 import { defineComponent, ref, onMounted } from 'vue'
 export default defineComponent({
   setup() {
     const value = ref('https://shaonq.github.io/md/file/如何快速实现网页预览PDF文件.pdf')
-    const loading = ref(null)
+    const loading = ref(undefined)
     async function loadPdfPath(el, path) {
       if (!window.pdfjsLib) {
         console.time('pdfjs v2.5.207')
         await shaonq.loadJs('https://unpkg.com/pdfjs-dist@2.5.207/build/pdf.js')
-        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://unpkg.com/pdfjs-dist@2.5.207/build/pdf.worker.js'
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://unpkg.com/pdfjs-dist@2.5.207/build/pdf.worker.js'
         console.timeEnd('pdfjs v2.5.207')
       }
       return new Promise(function (resolve, reject) {
-        pdfjsLib
+        window.pdfjsLib
           .getDocument(path)
           .promise.then((pdf) => {
             const curr = 1,
@@ -45,14 +44,18 @@ export default defineComponent({
                 canvas.width = viewport.width || 794
                 canvas.height = viewport.height || 1123
                 canvas.style.width = '100%'
-                canvas.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.16)'
-                canvas.style.marginBottom = '5px'
-                canvas.style.borderRadius = '2px'
                 canvas.style.display = 'block'
+                canvas.style.borderRadius = '4px'
                 const ctx = canvas.getContext('2d')
                 const renderTask = pdfPage.render({ canvasContext: ctx, viewport: viewport })
-                el.appendChild(canvas)
-                canvas = null
+                let div = document.createElement('div')
+                div.className = 'pdfSection'
+                div.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.16)'
+                div.style.margin = '12px'
+                div.style.borderRadius = '4px'
+                div.appendChild(canvas)
+                el.appendChild(div)
+                div = canvas = null
                 return renderTask.promise
               })
             }
@@ -92,4 +95,16 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.pdfViewer {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: 600px;
+  background-color: #f5f5f5;
+  border: 1px solid #d8d8d8;
+  overflow: auto;
+}
+</style>

@@ -39,7 +39,7 @@ module.exports = {
     'no-var': 'error',
     'prettier/prettier': 'error',
     // 禁止出现console
-    'no-console': 'warn',
+    'no-console': 'off',
     // 禁用debugger
     'no-debugger': 'warn',
     // 禁止出现重复的 case 标签
@@ -94,15 +94,8 @@ module.exports = {
     camelcase: 'warn',
     // 强制使用一致的缩进
     indent: 'off',
-    // 强制在 JSX 属性中一致地使用双引号或单引号
-    // 'jsx-quotes': 'warn',
     // 强制可嵌套的块的最大深度4
     'max-depth': 'warn',
-    // 强制最大行数 300
-    // "max-lines": ["warn", { "max": 1200 }],
-    // 强制函数最大代码行数 50
-    // 'max-lines-per-function': ['warn', { max: 70 }],
-    // 强制函数块最多允许的的语句数量20
     'max-statements': ['warn', 100],
     // 强制回调函数最大嵌套深度
     'max-nested-callbacks': ['warn', 3],

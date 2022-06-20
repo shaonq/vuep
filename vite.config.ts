@@ -4,7 +4,7 @@ import { viteMockServe } from 'vite-plugin-mock'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
 
-// vite api: https://vitejs.dev/config/
+// vite api: https://cn.vitejs.dev/config/
 export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
   const isBuild = command === 'build'
   return {

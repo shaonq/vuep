@@ -25,7 +25,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import shaonq from 'shaonq'
 const name = 'docs'
 export default defineComponent({
   name,
