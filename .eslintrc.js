@@ -37,7 +37,8 @@ module.exports = {
     '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'no-var': 'error',
-    'prettier/prettier': 'error',
+    // https://github.com/prettier/eslint-plugin-prettier#options
+    'prettier/prettier': ['error', { singleQuote: true, parser: 'flow' }],
     // 禁止出现console
     'no-console': 'off',
     // 禁用debugger

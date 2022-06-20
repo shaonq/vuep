@@ -108,7 +108,7 @@ input,
 button,
 textarea,
 select {
-  font-family: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif;
+  font-family: tahoma, Microsoft YaHei, Arial, sans-serif;
 }
 /* global.css */
 a {

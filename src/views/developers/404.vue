@@ -2,7 +2,7 @@
   <div class="card">
     <p style="font-size: 28px; color: #2f2f2f">404</p>
     <p style="font-size: 16px; color: #888888; margin-top: 8px">对不起，系统找不到您访问的页面！</p>
-    <router-link style="display: block; margin-top: 10px; color: #ff9800" :to="{ path: '/' }">返回首页</router-link>
+    <router-link style="display: block; margin-top: 10px; color: #ff9800" to="/">返回首页</router-link>
   </div>
 </template>
 

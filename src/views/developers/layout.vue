@@ -5,13 +5,13 @@
         <div class="layout-warp">
           <div class="u-flex u-flex--start">
             <router-link to="/" class="layout-mobile-hide">
-              <img src="../assets/logo.png" width="256" draggable="false" />
+              <img src="../../assets/logo.png" width="256" draggable="false" />
             </router-link>
             <div class="u-flex__item layout-mobile-hide"></div>
             <div>
-              <router-link class="layout-hd__link" :to="{ path: '/docs' }">相关文档</router-link>
-              <router-link class="layout-hd__link" :to="{ path: '/developer' }">组件</router-link>
-              <router-link class="layout-hd__link" :to="{ path: '/admin' }">admin</router-link>
+              <router-link class="layout-hd__link" :to="{ path: '/developers/note' }">相关文档</router-link>
+              <router-link class="layout-hd__link" :to="{ path: '/developers/component' }">组件</router-link>
+              <router-link class="layout-hd__link" :to="{ path: '/admin' }">后台管理</router-link>
             </div>
           </div>
         </div>

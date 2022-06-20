@@ -6,6 +6,8 @@ module.exports = {
   proseWrap: 'never', // 不换行
   singleQuote: true,
   semi: false,
+  singleQuote: true,
+  parser: 'flow',
   overrides: [
     {
       files: '*.json',
