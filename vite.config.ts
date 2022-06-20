@@ -2,6 +2,8 @@
 import { defineConfig, UserConfig, ConfigEnv } from 'vite'
 import { viteMockServe } from 'vite-plugin-mock'
 import vue from '@vitejs/plugin-vue'
+// import vueJsx from '@vitejs/plugin-vue-jsx'
+import vueSetupExtend from 'vite-plugin-vue-setup-extend'
 import path from 'path'
 
 /** unplugin-vue-components/vite */
@@ -15,6 +17,8 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
     base: '/vue/',
     plugins: [
       vue(),
+      // vueJsx(),
+      vueSetupExtend(),
       // import viteCompression from 'vite-plugin-compression'
       // gzip压缩 生产环境生成 .gz 文件
       // viteCompression({ verbose: true, disable: false, threshold: 10240, algorithm: 'gzip', ext: '.gz', }),

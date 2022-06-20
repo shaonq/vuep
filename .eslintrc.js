@@ -38,7 +38,8 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'no-var': 'error',
     // https://github.com/prettier/eslint-plugin-prettier#options
-    'prettier/prettier': ['error', { singleQuote: true, parser: 'flow' }],
+    // prettier 会提示各种奇怪德的错误
+    'prettier/prettier': 'warn',
     // 禁止出现console
     'no-console': 'off',
     // 禁用debugger
@@ -141,6 +142,7 @@ module.exports = {
     'no-async-promise-executor': 'warn',
     // 关闭vue文件命名规则
     'vue/multi-word-component-names': 'off',
+    'space-before-function-paren': 0,
   },
   globals: {
     defineProps: 'readonly',

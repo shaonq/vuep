@@ -41,7 +41,6 @@ export default defineComponent({
         }
         return item
       })
-      console.log(list)
     return { list }
   },
 })

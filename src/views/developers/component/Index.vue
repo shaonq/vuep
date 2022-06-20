@@ -12,7 +12,7 @@
           <div class="u-card">
             <div class="u-card__hd"><span style="font-size: 15px">文章列表</span></div>
             <div class="u-card__bd" style="padding: 8px 0">
-              <router-link v-for="(item, index) in list" v-slot="{ href, navigate,isExactActive }" :key="index" custom :to="item.path">
+              <router-link v-for="(item, index) in list" v-slot="{ href, navigate, isExactActive }" :key="index" custom :to="item.path">
                 <a draggable="false" class="u-dialog--dropdown-item" :class="{ 'is-active': isExactActive }" :href="href" @click="navigate"> {{ item.name }} </a>
               </router-link>
             </div>
@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent,ref } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 const name = 'component'
 export default defineComponent({

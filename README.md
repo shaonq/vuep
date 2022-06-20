@@ -49,9 +49,9 @@ export default router
 
 - `@vitejs/plugin-vue` 提供 `Vue 3` 单文件组件支持
 - `@vitejs/plugin-vue-jsx` 提供 Vue 3 `JSX` 支持（通过 专用的 Babel 转换插件）
-- `@vitejs/plugin-legacy` 为除IE之外的浏览器提供`兼容性`支持
+- `@vitejs/plugin-legacy` 为除 IE 之外的浏览器提供`兼容性`支持
 - `vite-plugin-mock` `Mock`支持
-- `vite-plugin-compression` 开启gzip压缩
+- `vite-plugin-compression` 开启 gzip 压缩
 - `unplugin-vue-components` (Ant Design Vue 、 Element Plus、TDesign 等组件自动按需引用 )
-- `vite-plugin-vue-setup-extend` 提供template setup 语法糖
+- `vite-plugin-vue-setup-extend` 提供 template setup 语法糖
 - .....

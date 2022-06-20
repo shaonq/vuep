@@ -38,7 +38,7 @@ const list = demoPathNames.map((path) => {
       item.meta = { title: item.name }
       return item
     })
-  return { path, name: path, component, children, }
+  return { path, name: path, component, children }
 }) as RouteRecordRaw[]
 
 export default [
@@ -47,6 +47,9 @@ export default [
     name: 'developers',
     redirect: '/developers/note',
     component: () => import('@/views/developers/layout.vue'),
-    children: [...list, { path: '/:pathMatch(.*)*', name: '404', meta: { title: 404 }, component: () => import('@/views/developers/404.vue') }],
+    children: [
+      ...list,
+      // { path: '/:pathMatch(.*)*', name: '404', meta: { title: 404 }, component: () => import('@/views/developers/404.vue') }
+    ],
   },
 ]
