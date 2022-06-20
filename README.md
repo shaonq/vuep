@@ -52,6 +52,6 @@ export default router
 - `@vitejs/plugin-legacy` 为除IE之外的浏览器提供`兼容性`支持
 - `vite-plugin-mock` `Mock`支持
 - `vite-plugin-compression` 开启gzip压缩
-- `unplugin-vue-components` (Ant Design Vue 、 Element Plus 等组件自动按需引用 )
+- `unplugin-vue-components` (Ant Design Vue 、 Element Plus、TDesign 等组件自动按需引用 )
 - `vite-plugin-vue-setup-extend` 提供template setup 语法糖
 - .....

@@ -29,7 +29,7 @@
     </div>
     <!-- gantt demo -->
     <div>
-      <Gantt :list="list" style="height: 380px" class="test-gantt" @on-item-click="handleClick" />
+      <u-gantt :list="list" style="height: 380px" class="test-gantt" @on-item-click="handleClick" />
     </div>
   </div>
 </template>

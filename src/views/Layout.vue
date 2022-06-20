@@ -4,13 +4,14 @@
       <div class="layout-hd">
         <div class="layout-warp">
           <div class="u-flex u-flex--start">
-            <a href="https://shaonq.github.io/vue" class="layout-mobile-hide">
+            <router-link to="/" class="layout-mobile-hide">
               <img src="../assets/logo.png" width="256" draggable="false" />
-            </a>
+            </router-link>
             <div class="u-flex__item layout-mobile-hide"></div>
             <div>
               <router-link class="layout-hd__link" :to="{ path: '/docs' }">相关文档</router-link>
-              <router-link class="layout-hd__link" :to="{ path: '/developer' }">实验室</router-link>
+              <router-link class="layout-hd__link" :to="{ path: '/developer' }">组件</router-link>
+              <router-link class="layout-hd__link" :to="{ path: '/admin' }">admin</router-link>
             </div>
           </div>
         </div>

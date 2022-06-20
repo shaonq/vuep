@@ -4,6 +4,9 @@ import { viteMockServe } from 'vite-plugin-mock'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
 
+/** unplugin-vue-components/vite */
+import Components from 'unplugin-vue-components/vite'
+import { TDesignResolver } from 'unplugin-vue-components/resolvers'
 // vite api: https://cn.vitejs.dev/config/
 export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
   const isBuild = command === 'build'
@@ -22,6 +25,13 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
         localEnabled: !isBuild, // 是否启用本地mock
         prodEnabled: isBuild, // 是否启用生产环境mock
         injectCode: `import { setupProdMockServer } from '../mock/_createProductionServer'; setupProdMockServer();`,
+      }),
+      Components({
+        resolvers: [
+          TDesignResolver({
+            library: 'vue-next',
+          }),
+        ],
       }),
     ],
     resolve: {

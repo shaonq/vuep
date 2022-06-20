@@ -1,13 +1,13 @@
-import Gantt from './componentGantt/Main.vue'
-import FullCalendar from './componentCalendar/Index.vue'
-import Quill from './componentQuill/Index.vue'
-import Charts from './componentChart.vue'
+import UGantt from './UGantt.vue'
+import UFullCalendar from './componentCalendar/UFullCalendar.vue'
+import UQuill from './componentQuill/UQuill.vue'
+import UChart from './UChart.vue'
 
 export default {
   install(app: any) {
-    app.component('Gantt', Gantt)
-    app.component('UFullCalendar', FullCalendar)
-    app.component('UQuill', Quill)
-    app.component('UChart', Charts)
+    app.component('UGantt', UGantt)
+    app.component('UFullCalendar', UFullCalendar)
+    app.component('UQuill', UQuill)
+    app.component('UChart', UChart)
   },
 }

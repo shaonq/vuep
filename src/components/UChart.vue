@@ -331,6 +331,7 @@ const theme = {
 }
 echarts.registerTheme('u-theme', theme)
 export default {
+  name: 'UChart',
   props: {
     options: {
       type: Object,

@@ -4,9 +4,9 @@
     <ul>
       <!-- <li><del>node v10.16.0</del></li>
 			<li><del>node v12.22.4</del></li>  -->
-      <li class="u-color-light">node v14.16.0(2021-09)[截至 2023-04]</li>
       <li>node v16.13.0(2022-04)[推荐]</li>
-      <li>yarn v1.22.18</li>
+      <li class="u-color-light">node v14.16.0(2021-09)[截至 2023-04]</li>
+      <li>yarn v1.22.x</li>
     </ul>
     <h1>工具安装</h1>
     <div>
@@ -26,7 +26,7 @@
           <a href="https://pc.qq.com/detail/13/detail_22693.html"><code>Git</code>下载地址</a>
         </li>
         <li>
-          <a href="https://nodejs.org/en/blog/release/v14.16.0/"><code>Node</code>下载地址</a>
+          <a href="https://nodejs.org/en/blog/release/v16.13.0/"><code>Node</code>下载地址</a>
         </li>
       </ul>
       <h1>项目依赖包( yarn )</h1>
@@ -61,6 +61,9 @@
  </pre
       >
     </div>
+    <hr />
+    <p class="u-center">vue3.x不兼容IE,保留vue2.6兼容IE10+文档</p>
+    <hr />
     <h1>兼容IE10+</h1>
     <h1 style="color: #ff4e20">﹡ 2022年6月15日后IE11将不再被支持</h1>
     <div>
@@ -91,19 +94,18 @@ configureWebpack: config => {
     <h1>项目结构</h1>
     <pre class="line-numbers"><code class="language-javascript">
 # public/
+# mock/
 # -------- index.html
-# src/
-# -------- asstes/ # 静态资源
+# src/  # @
+# -------- assets/ # 静态资源
 # -------- components/ # 组件
-# -------- styles/ # 样式
 # -------- utils/ # 工具
 # -------- views/ # 程序页面
 # -------- App.vue # 入口模板
-# -------- main.js # 主程序入口
-# -------- router.js # 路由
-# -------- store.js # Vuex
-# babel.config.js
-# vue.config.js 
+# -------- main.ts # 主程序入口
+# -------- router/ # 路由
+# -------- store/ 
+# vite.config.js 
 </code></pre>
 
     <h1>项目启动</h1>
@@ -114,7 +116,7 @@ yarn build   # 编译项目
 </code> </pre>
   </div>
 </template>
-<script>
+<script lang="ts">
 import { defineComponent, ref, onMounted } from 'vue'
 
 export default defineComponent({

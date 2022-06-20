@@ -52,7 +52,15 @@ const routes: RouteRecordRaw[] = [
     name: 'Layout',
     redirect: '/docs',
     component: () => import('@/views/Layout.vue'),
-    children: [...vueRouters, { path: '/:pathMatch(.*)*', name: '404', meta: { title: 404 }, component: () => import('@/views/404.vue') }],
+    children: [
+      ...vueRouters,
+      {
+        path: '/login',
+        name: 'login',
+        component: () => import('@/views/login/index.vue'),
+      },
+      { path: '/:pathMatch(.*)*', name: '404', meta: { title: 404 }, component: () => import('@/views/404.vue') },
+    ],
   },
 ]
 const router = createRouter({

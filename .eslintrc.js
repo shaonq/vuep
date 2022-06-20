@@ -138,6 +138,8 @@ module.exports = {
     'no-extra-boolean-cast': 'warn',
     'no-case-declarations': 'warn',
     'no-async-promise-executor': 'warn',
+    // 关闭vue文件命名规则
+    'vue/multi-word-component-names': 'off',
   },
   globals: {
     defineProps: 'readonly',
