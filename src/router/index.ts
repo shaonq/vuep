@@ -1,8 +1,7 @@
 import { createRouter, useRoute, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import developersRouters from './modules/developers'
-import tdesignRouters from './modules/tdesign'
 
-export const asyncRouterList: Array<RouteRecordRaw> = [...developersRouters, ...tdesignRouters]
+export const asyncRouterList: Array<RouteRecordRaw> = [...developersRouters]
 
 const routes: RouteRecordRaw[] = [
   {
@@ -33,6 +32,13 @@ const router = createRouter({
   routes,
   linkActiveClass: 'is-active',
   linkExactActiveClass: 'is-exact-active',
+  scrollBehavior() {
+    return {
+      el: '#app',
+      top: 0,
+      behavior: 'smooth',
+    }
+  },
 })
 
 export default router

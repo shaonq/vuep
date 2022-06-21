@@ -2,13 +2,13 @@
 import { defineConfig, UserConfig, ConfigEnv } from 'vite'
 import { viteMockServe } from 'vite-plugin-mock'
 import vue from '@vitejs/plugin-vue'
-// import vueJsx from '@vitejs/plugin-vue-jsx'
+import vueJsx from '@vitejs/plugin-vue-jsx'
 import vueSetupExtend from 'vite-plugin-vue-setup-extend'
 import path from 'path'
 
 /** unplugin-vue-components/vite */
 import Components from 'unplugin-vue-components/vite'
-import { TDesignResolver } from 'unplugin-vue-components/resolvers'
+// import { TDesignResolver } from 'unplugin-vue-components/resolvers'
 // vite api: https://cn.vitejs.dev/config/
 export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
   const isBuild = command === 'build'
@@ -17,7 +17,7 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
     base: '/vue/',
     plugins: [
       vue(),
-      // vueJsx(),
+      vueJsx(),
       vueSetupExtend(),
       // import viteCompression from 'vite-plugin-compression'
       // gzip压缩 生产环境生成 .gz 文件
@@ -32,9 +32,9 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
       }),
       Components({
         resolvers: [
-          TDesignResolver({
-            library: 'vue-next',
-          }),
+          // TDesignResolver({
+          //   library: 'vue-next',
+          // }),
         ],
       }),
     ],

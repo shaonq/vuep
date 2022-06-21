@@ -4,7 +4,7 @@ import * as echarts from 'echarts/core'
 /**
  * eChart hook
  * @param domId
- * @param chart
+ * apache charts autosize
  */
 export const useChart = (domId: string): Ref<echarts.ECharts> => {
   let chartContainer: HTMLCanvasElement
@@ -39,7 +39,7 @@ export const useChart = (domId: string): Ref<echarts.ECharts> => {
  * @returns
  */
 export const useCounter = (duration = 60): [Ref<number>, () => void] => {
-  let intervalTimer
+  let intervalTimer: number | any
   onUnmounted(() => {
     clearInterval(intervalTimer)
   })
