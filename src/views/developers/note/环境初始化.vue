@@ -29,6 +29,26 @@
           <a href="https://nodejs.org/en/blog/release/v16.13.0/"><code>Node</code>下载地址</a>
         </li>
       </ul>
+      <h1>多Node管理工具 nvm</h1>
+      <blockquote>推荐使用新版本Node开发,维护老项目需要切换低版本</blockquote>
+      <ul>
+        <li><a href="https://github.com/coreybutler/nvm-windows/releases">Github Download</a></li>
+        <li>
+          <p>国内镜像</p>
+          <pre>
+nvm node_mirror: http://npm.taobao.org/mirrors/node/
+nvm npm_mirror: https://npm.taobao.org/mirrors/npm/ </pre
+          >
+        </li>
+        <li>
+          <p>常用命令</p>
+          <pre>
+nvm list              // 查看已安装的版本 * 为当期使用版本
+nvm install 16.13.0   // 安装Node对应版本
+nvm use 16.13.0       // 切换版本（需要管理员权限）</pre
+          >
+        </li>
+      </ul>
       <h1>项目依赖包( yarn )</h1>
       <pre class="line-numbers"><code class="language-javascript">
  # npm config set registry https://registry.npm.taobao.org 

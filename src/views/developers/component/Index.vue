@@ -26,11 +26,11 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-const name = 'component'
 export default defineComponent({
   name,
   setup() {
     const route = useRoute()
+    const name = 'component'
     const list = Object.assign([], route.matched)
       .filter((i) => i.name === name)?.[0]
       .children?.filter((i) => i.path !== 'Index')

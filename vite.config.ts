@@ -14,7 +14,7 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
   const isBuild = command === 'build'
   return {
     /** base 通baseUrl , 默认 ./ */
-    base: '/vue/',
+    // base: '/vue/',
     plugins: [
       vue(),
       vueJsx(),
