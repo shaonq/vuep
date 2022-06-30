@@ -335,7 +335,9 @@ export default {
   props: {
     options: {
       type: Object,
-      default() {},
+      default() {
+        return {}
+      },
     },
     renderer: {
       type: String,
@@ -343,7 +345,7 @@ export default {
     },
     theme: {
       type: [String, Object],
-      default() {},
+      default: '',
     },
   },
   data() {
@@ -369,8 +371,8 @@ export default {
       this.timer && clearTimeout(this.timer)
       if (this.chart) {
         if (Array.isArray(this.options)) {
-          let idx = 0,
-            len = this.options.length
+          let idx = 0
+          const len = this.options.length
           const loop = () => {
             // console.log(idx, len)
             this.chart.setOption(this.options[idx])

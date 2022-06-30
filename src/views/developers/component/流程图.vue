@@ -17,8 +17,7 @@
     "@topology/class-diagram": "^0.3.0",
     "@topology/core": "^0.5.8",
     "@topology/flow-diagram": "^0.3.0",
-    "@topology/sequence-diagram": "^0.3.0",
-	 </pre
+    "@topology/sequence-diagram": "^0.3.0",</pre
       >
       <hr />
       <blockquote>topology-bundle cdn demo</blockquote>
@@ -38,7 +37,7 @@ export default {
         await shaonq.loadJs`https://unpkg.com/topology-bundle@0.5.36/index.js`
         console.timeEnd('Le5leTopology')
       }
-      const canvas = new Le5leTopology.Topology('l5l', {
+      const canvas = new window.Le5leTopology.Topology('l5l', {
         on(event, data) {
           if (data) {
             console.log('onMessage', event, data)

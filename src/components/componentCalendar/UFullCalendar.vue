@@ -72,8 +72,8 @@
               <!-- 显示条目 -->
               <div class="__calendar-item-bd">
                 <div
-                  v-for="(item, index) in getItems[ymd]"
-                  :key="index"
+                  v-for="(item, idx) in getItems[ymd]"
+                  :key="idx"
                   class="__calendar-title"
                   :class="item._className"
                   :title="item.title + item.content"
@@ -149,7 +149,7 @@
               </div>
               <!-- 显示条目 -->
               <div class="__calendar-item-bd">
-                <div v-for="(item, index) in getItems[ymd].slice(0, 4)" :key="index">
+                <div v-for="(item, idx) in getItems[ymd].slice(0, 4)" :key="idx">
                   <div :key="index" class="__calendar-title" :class="item._className" :title="item.title + item.content" @click="$emit('on-item', ymd, item._source, $event)">
                     <cite>{{ item._hm }}</cite> {{ item.title }}
                   </div>

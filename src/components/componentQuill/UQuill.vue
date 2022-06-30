@@ -25,6 +25,7 @@
 </template>
 
 <script>
+/* eslint-disable  */
 // api: https://www.kancloud.cn/liuwave/quill/1409369
 // bold 粗体
 // italic 斜体

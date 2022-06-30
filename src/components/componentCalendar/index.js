@@ -1,3 +1,5 @@
+/* eslint-disable camelcase */
+/* eslint-disable prefer-const */
 import UTIL_LUNAR from './lunar.js'
 import UTIL_DATE from './date.js'
 import './index.scss'

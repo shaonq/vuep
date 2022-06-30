@@ -179,7 +179,7 @@
 
 util.toast(content,time)
 util.hideToast(index) // 对所有适用 不穿参数会关闭所有 extend = false 的窗体
-util.showloading(content)
+util.showLoading(content)
 util.showModal(options)
 
 /**
@@ -288,6 +288,8 @@ export default {
             case 'remove':
               shaonq.toast('点击了选项')
               break
+            default:
+              break
           }
         },
       })
@@ -305,6 +307,8 @@ export default {
           switch (value) {
             case 'remove':
               shaonq.toast('点击了选项')
+              break
+            default:
               break
           }
         },

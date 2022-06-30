@@ -48,11 +48,15 @@ export default defineComponent({
       async exportXLSX(list) {
         const data = Object.assign([], list).map((obj) => Object.values(obj))
         try {
-          if (typeof XLSX === 'undefined') {
+          if (!window.XLSX) {
             console.time('xlsx v0.16.8')
             // @demo:https://sheetjs.com/demo/manifest.html
             await shaonq.loadJs('https://unpkg.com/xlsx@0.16.8/dist/xlsx.full.min.js')
             console.timeEnd('xlsx v0.16.8')
+          }
+          const XLSX = window.XLSX
+          if (!XLSX) {
+            throw 'XLSX is not defined'
           }
           // 设置表格样式，!cols为列宽
           const options = {

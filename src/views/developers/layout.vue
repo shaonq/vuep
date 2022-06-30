@@ -11,7 +11,7 @@
             <div>
               <router-link draggable="false" class="layout-hd__link" :to="{ path: '/developers/note' }">相关文档</router-link>
               <router-link draggable="false" class="layout-hd__link" :to="{ path: '/developers/component' }">组件</router-link>
-              <a draggable="false" class="layout-hd__link" href="/admin"> 后台管理</a>
+              <a draggable="false" class="layout-hd__link" href="/arco-pro"> 后台管理</a>
             </div>
           </div>
         </div>

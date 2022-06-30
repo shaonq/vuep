@@ -123,7 +123,7 @@ export default {
       type: Array,
       default: () => [],
     },
-    skin: String,
+    skin: { type: String, default: '' },
     labelList: {
       type: Array,
       default: () => {
@@ -148,6 +148,7 @@ export default {
       },
     },
   },
+  emits: ['on-item-click'],
   data() {
     return {
       dayPX: {
@@ -203,7 +204,9 @@ export default {
       let time
       try {
         time = shaonq.date.toDate(day)
-      } catch (e) {}
+      } catch (e) {
+        /**  */
+      }
       if (!time) {
         time = isNow ? new Date() : 0
       }

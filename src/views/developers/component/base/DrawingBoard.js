@@ -395,6 +395,6 @@ export default class DrawingBoard {
     imgData && this.ctx.putImageData(imgData, 0, 0)
   }
   exportPNG(op = 0.91) {
-    return canvas.toDataURL('image/png', op)
+    return this.canvas.toDataURL('image/png', op)
   }
 }

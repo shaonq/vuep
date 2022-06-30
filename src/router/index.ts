@@ -9,11 +9,6 @@ const routes: RouteRecordRaw[] = [
     redirect: '/developers',
   },
   ...asyncRouterList,
-  {
-    path: '/login',
-    name: 'login',
-    component: () => import('@/views/login/index.vue'),
-  },
 ]
 export const getActive = (maxLevel = 3): string => {
   const route = useRoute()
