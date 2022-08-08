@@ -123,7 +123,10 @@ export default {
       type: Array,
       default: () => [],
     },
-    skin: { type: String, default: '' },
+    skin: {
+      type: String,
+      default: '',
+    },
     labelList: {
       type: Array,
       default: () => {
@@ -148,7 +151,6 @@ export default {
       },
     },
   },
-  emits: ['on-item-click'],
   data() {
     return {
       dayPX: {
@@ -187,7 +189,7 @@ export default {
      * 周期最小为30天
      */
     dateRangeDay() {
-      return Math.max(this.dateRange.rangeDay, 30)
+      return this.dateRange.rangeDay > 30 ? this.dateRange.rangeDay : 30
     },
   },
   mounted() {
@@ -205,7 +207,7 @@ export default {
       try {
         time = shaonq.date.toDate(day)
       } catch (e) {
-        /**  */
+        //
       }
       if (!time) {
         time = isNow ? new Date() : 0

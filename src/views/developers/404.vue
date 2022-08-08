@@ -8,6 +8,21 @@
 
 <script>
 export default {}
+
+function getChineseNumbers(num = 0, errValue = '') {
+  if (typeof num !== 'number' || isNaN(num)) return errValue
+  if (num === 0) return '零'
+  const loop = ['十', '百', '千']
+  const place = ['', '万', '亿', '万'].reduce((s, i) => s.concat(i).concat(loop), [])
+  const single = '0一二三四五六七八九'.split('')
+  let arr = String(num).split('').reverse()
+  arr = arr.map((n, i) => {
+    const unit = place[i]
+    const value = single[n] + unit
+    return n === '0' ? (~loop.indexOf(unit) ? single[n] : unit) : value
+  })
+  return arr.reverse().join('').replace(/0+/g, '零')
+}
 </script>
 
 <style lang="scss" scoped>

@@ -55,7 +55,7 @@ module.exports = {
     // 禁止在 return、throw、continue 和 break 语句之后出现不可达代码
     'no-unreachable': 'warn',
     // 强制所有控制语句使用一致的括号风格
-    curly: 'warn',
+    curly: 'off',
     // 要求 switch 语句中有 default 分支
     'default-case': 'warn',
     // 强制尽可能地使用点号

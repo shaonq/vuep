@@ -5,18 +5,16 @@ import { store } from './store'
 
 const app = createApp(App)
 
-import './permission'
+import 'shaonq/scss'
+import shaonq from 'shaonq'
+;(window as any).shaonq = shaonq
+import '@/components/componentQuill/index.scss'
 
-/**
- * unplugin-vue-components auto push
- * import Components from './components/index'
- * app.use(Components)
- * 这里是因为我的组件里面的scss我全局使用
- */
-import Components from './components/index'
-app.use(Components)
+async function bootstrap() {
+  app.use(store)
+  app.use(router)
 
-app.use(store)
-app.use(router)
+  app.mount('#app')
+}
 
-app.mount('#app')
+bootstrap()

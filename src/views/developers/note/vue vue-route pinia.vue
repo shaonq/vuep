@@ -85,8 +85,7 @@ export const useCounterStore = defineStore('counter', {
     doublePlusOne(): number {
       return this.counter * 2 + 1
     },
-  }
-  
+  }  
 })
 
 // page.vue

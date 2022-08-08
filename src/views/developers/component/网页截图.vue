@@ -49,7 +49,7 @@ export default {
           canva.style.height = h + 'px'
           const ctx = canva.getContext('2d')
           ctx.scale(scale, scale)
-          window.html2canvas(el, { canvas: canva, background: '#FFFFFF', scrollY: 0, scrollX: 0, width: w, height: h, useCORS: true }).then(success)
+          html2canvas(el, { canvas: canva, background: '#FFFFFF', scrollY: 0, scrollX: 0, width: w, height: h, useCORS: true }).then(success)
         })()
       },
       // 生成pdf
@@ -69,7 +69,7 @@ export default {
           const pdfheight = a4pt.height
           const base64 = canvas.toDataURL('image/jpeg', 0.83)
           const pageCount = Math.ceil(allHeight / pdfheight)
-          let pdf = new window.jsPDF('', 'pt', 'a4')
+          let pdf = new jsPDF('', 'pt', 'a4')
           for (let page = 1; page <= pageCount; page++) {
             const top = -(page - 1) * pdfheight
             // 最后一页如果小于5px，则跳过打印

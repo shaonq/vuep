@@ -22,13 +22,7 @@
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {}
-  },
-}
-</script>
+<script setup></script>
 <style lang="scss">
 // 布局
 .layout {

@@ -1,6 +1,6 @@
 import type { EChartsOption } from 'echarts'
 // Parliament chart
-/* eslint-disable  */
+
 const pieData = [
   { value: 40, name: 'A' },
   { value: 32, name: 'B' },

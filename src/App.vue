@@ -2,17 +2,7 @@
   <router-view></router-view>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-import shaonq from 'shaonq'
-export default defineComponent({
-  name: 'App',
-  setup() {
-    // google chrome tools debug
-    window.shaonq = shaonq
-  },
-})
-</script>
+<script lang="ts" setup></script>
 
 <style>
 /* reset.css */
