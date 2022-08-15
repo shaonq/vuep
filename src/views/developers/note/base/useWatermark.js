@@ -20,10 +20,6 @@ export default function useWatermark(appendEl) {
   }
   const id = 'watermark-dom'
   let watermarkEl = document.getElementById(id)
-  function clearWatermark() {
-    appendEl.removeChild(watermarkEl)
-    removeResizeListener(window, 'resize', update)
-  }
 
   function createBase64(str, callback) {
     const can = document.createElement('canvas')
@@ -53,7 +49,7 @@ export default function useWatermark(appendEl) {
     if (options.height) el.style.height = `${options.height}px`
     if (options.str) el.style.background = `url(${createBase64(options.str, options.callback)}) left top repeat`
   }
-
+  let mutationObserverClear
   function createWatermark(str) {
     if (watermarkEl) {
       updateWatermark({ str })
@@ -62,7 +58,6 @@ export default function useWatermark(appendEl) {
     const div = document.createElement('div')
     watermarkEl = div
     div.id = id
-    // div.style.pointerEvents = 'none'
     div.setAttribute('style', 'pointer-events: none !important; display: block !important')
     div.style.position = 'absolute'
     div.style.top = '0px'
@@ -70,13 +65,21 @@ export default function useWatermark(appendEl) {
     div.style.zIndex = '88888'
     updateWatermark({ str, width: appendEl.clientWidth, height: appendEl.clientHeight })
     appendEl.appendChild(div)
-    mutationObserverChange()
+    mutationObserverClear = mutationObserverChange()
     return id
   }
 
   function setWatermark(str) {
     createWatermark(str)
     addResizeListener(window, 'resize', update)
+  }
+
+  function clearWatermark() {
+    appendEl.removeChild(watermarkEl)
+    removeResizeListener(window, 'resize', update)
+    // clear MutationObserver observe
+    typeof mutationObserverClear === 'function' && mutationObserverClear()
+    mutationObserverClear = null
   }
 
   function mutationObserverChange() {
@@ -90,6 +93,7 @@ export default function useWatermark(appendEl) {
        * appendEl bind removedNodes[el === watermarkEl] *
        * watermarkEl bind attributes *
        */
+      console.log(record)
       if ((record.removedNodes.length === 1 && record.removedNodes[0] === watermarkEl) || (record.target && record.target === watermarkEl)) {
         if (isHTMLElement(watermarkEl)) {
           watermarkDom.disconnect(watermarkEl, option)
@@ -102,6 +106,9 @@ export default function useWatermark(appendEl) {
     })
     watermarkDom.observe(appendEl, option)
     watermarkDom.observe(watermarkEl, option)
+    return function () {
+      watermarkDom.disconnect(appendEl, option)
+    }
   }
 
   return { setWatermark, clearWatermark }
