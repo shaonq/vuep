@@ -49,7 +49,7 @@
   &-hd {
     position: fixed;
     width: 100%;
-    z-index: 999;
+    z-index: 99999;
     &__fill,
     & {
       height: 60px;

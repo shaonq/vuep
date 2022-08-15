@@ -8,21 +8,21 @@ function removeResizeListener(element, event, handler) {
     element.removeEventListener(event, handler, false)
   }
 }
-
+function isHTMLElement(node) {
+  return node instanceof window.HTMLElement || node instanceof HTMLElement
+}
+let tempOptions = {}
 export default function useWatermark(appendEl) {
   if (!appendEl) appendEl = document.body
-  const func = function () {
-    const el = appendEl
-    if (!el) return
-    updateWatermark({ height: el.clientHeight, width: el.clientWidth })
+  if (!isHTMLElement(appendEl)) throw 'watermark-dom not`t HTMLElement'
+  const update = function () {
+    updateWatermark({ height: appendEl.clientHeight, width: appendEl.clientWidth })
   }
   const id = 'watermark-dom'
   let watermarkEl = document.getElementById(id)
   function clearWatermark() {
-    const el = appendEl
-    if (!el) return
-    el.removeChild(watermarkEl)
-    removeResizeListener(window, 'resize', func)
+    appendEl.removeChild(watermarkEl)
+    removeResizeListener(window, 'resize', update)
   }
 
   function createBase64(str, callback) {
@@ -41,11 +41,12 @@ export default function useWatermark(appendEl) {
       cans.fillText(str, width / 20, height)
       callback && callback(cans)
     }
-    return can.toDataURL('image/png')
+    return can.toDataURL('image/png', 0.88)
   }
 
   function updateWatermark(options) {
     if (!options) options = { width: 320, height: 240, str: '' }
+    tempOptions = options
     const el = watermarkEl
     if (!el) return
     if (options.width) el.style.width = `${options.width}px`
@@ -61,21 +62,46 @@ export default function useWatermark(appendEl) {
     const div = document.createElement('div')
     watermarkEl = div
     div.id = id
-    div.style.pointerEvents = 'none'
+    // div.style.pointerEvents = 'none'
+    div.setAttribute('style', 'pointer-events: none !important; display: block !important')
+    div.style.position = 'absolute'
     div.style.top = '0px'
     div.style.left = '0px'
-    div.style.position = 'absolute'
-    div.style.zIndex = '99999'
-    const el = appendEl
-    if (!el) return id
-    updateWatermark({ str, width: el.clientWidth, height: el.clientHeight })
-    el.appendChild(div)
+    div.style.zIndex = '88888'
+    updateWatermark({ str, width: appendEl.clientWidth, height: appendEl.clientHeight })
+    appendEl.appendChild(div)
+    mutationObserverChange()
     return id
   }
 
   function setWatermark(str) {
     createWatermark(str)
-    addResizeListener(window, 'resize', func)
+    addResizeListener(window, 'resize', update)
+  }
+
+  function mutationObserverChange() {
+    const MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
+    if (!MutationObserver) return
+    const option = { childList: true, attributes: true, subtree: true }
+    const watermarkDom = new MutationObserver(function (records) {
+      const record = records[0]
+      if (!record) return
+      /**
+       * appendEl bind removedNodes[el === watermarkEl] *
+       * watermarkEl bind attributes *
+       */
+      if ((record.removedNodes.length === 1 && record.removedNodes[0] === watermarkEl) || (record.target && record.target === watermarkEl)) {
+        if (isHTMLElement(watermarkEl)) {
+          watermarkDom.disconnect(watermarkEl, option)
+          watermarkEl.remove()
+        }
+        watermarkEl = null
+        setWatermark(tempOptions.str)
+        watermarkDom.observe(watermarkEl, option)
+      }
+    })
+    watermarkDom.observe(appendEl, option)
+    watermarkDom.observe(watermarkEl, option)
   }
 
   return { setWatermark, clearWatermark }
