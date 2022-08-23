@@ -11,17 +11,17 @@ function removeResizeListener(element, event, handler) {
 function isHTMLElement(node) {
   return node instanceof window.HTMLElement || node instanceof HTMLElement
 }
-let tempOptions = {}
+let tempOptions = { width: 320, height: 240 }
 export default function useWatermark(appendEl) {
   if (!appendEl) appendEl = document.body
   if (!isHTMLElement(appendEl)) throw 'watermark-dom not`t HTMLElement'
   const update = function () {
-    updateWatermark({ height: appendEl.clientHeight, width: appendEl.clientWidth })
+    updateWatermark({ text: tempOptions.text, height: appendEl.clientHeight, width: appendEl.clientWidth })
   }
   const id = 'watermark-dom'
   let watermarkEl = document.getElementById(id)
 
-  function createBase64(str, callback) {
+  function createBase64(text, callback) {
     const can = document.createElement('canvas')
     const width = 320
     const height = 240
@@ -34,25 +34,25 @@ export default function useWatermark(appendEl) {
       cans.fillStyle = 'rgba(0, 0, 0, 0.15)'
       cans.textAlign = 'left'
       cans.textBaseline = 'middle'
-      cans.fillText(str, width / 20, height)
+      cans.fillText(text, width / 20, height)
       callback && callback(cans)
     }
     return can.toDataURL('image/png', 0.88)
   }
 
   function updateWatermark(options) {
-    if (!options) options = { width: 320, height: 240, str: '' }
+    if (!options) options = { width: 320, height: 240, text: '' }
     tempOptions = options
     const el = watermarkEl
     if (!el) return
     if (options.width) el.style.width = `${options.width}px`
     if (options.height) el.style.height = `${options.height}px`
-    if (options.str) el.style.background = `url(${createBase64(options.str, options.callback)}) left top repeat`
+    if (options.text) el.style.background = `url(${createBase64(options.text)}) left top repeat`
   }
   let mutationObserverClear
-  function createWatermark(str) {
+  function createWatermark(text) {
     if (watermarkEl) {
-      updateWatermark({ str })
+      updateWatermark({ text })
       return id
     }
     const div = document.createElement('div')
@@ -63,14 +63,15 @@ export default function useWatermark(appendEl) {
     div.style.top = '0px'
     div.style.left = '0px'
     div.style.zIndex = '88888'
-    updateWatermark({ str, width: appendEl.clientWidth, height: appendEl.clientHeight })
+    updateWatermark({ text, width: appendEl.clientWidth, height: appendEl.clientHeight })
     appendEl.appendChild(div)
     mutationObserverClear = mutationObserverChange()
     return id
   }
 
-  function setWatermark(str) {
-    createWatermark(str)
+  function setWatermark(text) {
+    if (typeof text === 'object') text = text.text
+    createWatermark(text)
     addResizeListener(window, 'resize', update)
   }
 
@@ -93,14 +94,13 @@ export default function useWatermark(appendEl) {
        * appendEl bind removedNodes[el === watermarkEl] *
        * watermarkEl bind attributes *
        */
-      console.log(record)
       if ((record.removedNodes.length === 1 && record.removedNodes[0] === watermarkEl) || (record.target && record.target === watermarkEl)) {
         if (isHTMLElement(watermarkEl)) {
           watermarkDom.disconnect(watermarkEl, option)
           watermarkEl.remove()
         }
         watermarkEl = null
-        setWatermark(tempOptions.str)
+        setWatermark(tempOptions.text)
         watermarkDom.observe(watermarkEl, option)
       }
     })

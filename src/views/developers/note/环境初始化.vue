@@ -2,12 +2,11 @@
   <div class="u-quill-body">
     <h1>工具版本</h1>
     <ul>
-      <!-- <li><del>node v10.16.0</del></li>
-			<li><del>node v12.22.4</del></li>  -->
-      <li>node v16.13.0(2022-04)[推荐]</li>
-      <li class="u-color-light">node v14.16.0(2021-09)[截至 2023-04]</li>
+      <li class="u-color-light">node v14.16.0[截至 2023-04]</li>
+      <li>node v16.13.0[推荐]</li>
       <li>yarn v1.22.x</li>
     </ul>
+    <blockquote>历史版本v10.16.0， v12.22.4 参考<a href="https://github.com/nodejs/Release/#end-of-life-releases" target="_blank"> end-of-life-releases</a></blockquote>
     <h1>工具安装</h1>
     <div>
       <ul>
@@ -20,7 +19,7 @@
             <li><code>Auto Close Tag</code> 一 自动添加结束标签</li>
             <li><code>IntelliJ IDEA Keybindings</code> 一 <code>IntelliJ</code>风格快捷键</li>
           </ol>
-          <blockquote>推荐登录账号同步插件 、 <code>vscode</code>,<code>git</code>,<code>nodejs</code> 安装在系统盘</blockquote>
+          <blockquote>推荐登录账号同步，建议不要修改开发软件默认安装路径</blockquote>
         </li>
         <li>
           <a href="https://pc.qq.com/detail/13/detail_22693.html"><code>Git</code>下载地址</a>
@@ -67,7 +66,7 @@ nvm use 16.13.0       // 切换版本（需要管理员权限）</pre
         </p>
       </blockquote>
       <pre>
- # npm default registry	  
+ # npm default registry	
  npm config set registry http://registry.npmjs.org
 
  # tencent npm registry  
@@ -81,36 +80,9 @@ nvm use 16.13.0       // 切换版本（需要管理员权限）</pre
  </pre
       >
     </div>
-    <hr />
-    <p class="u-center">vue3.x不兼容IE,保留vue2.6兼容IE10+文档</p>
-    <hr />
-    <h1>兼容IE10+</h1>
-    <h1 style="color: #ff4e20">﹡ 2022年6月15日后IE11将不再被支持</h1>
-    <div>
-      <blockquote>package.json -&gt; browserslist&nbsp;或者 .browserslist&nbsp; 添加 [“not ie &lt; 10”]</blockquote>
-      <div>
-        <blockquote>
-          Vue CLI 项目会使用 @vue/babel-preset-app，它通过 @babel/preset-env 和 browserslist 配置来决定项目需要的 polyfill 默认情况下，它会把 useBuiltIns: ‘usage’ 传递给 @babel/preset-env
-        </blockquote>
-        <pre class="line-numbers">
-          <code class="language-shell-session">
-# vue-cli3 推荐使用 babel-polyfill@6 	  
-yarn add babel-polyfill -D </code>
-          <code class="language-javascript">
-# babel.config.js       
-  presets: [ [ "@vue/app", { useBuiltIns: "entry" } ] ]
-
-# vue.config.js
-configureWebpack: config => {
-    transpileDependencies: ['*'], // node_modules 里面也需要编译的包
-    configureWebpack: config => {
-        config.entry.app = ["babel-polyfill", "./src/main.js"]
-		...
-	}	
-}	
-      </code>  </pre>
-      </div>
-    </div>
+    <h1>不兼容IE</h1>
+    <h1 style="color: #ff4e20">﹡ 2022年6月15日起IE11将不再被支持</h1>
+    <div></div>
     <h1>项目结构</h1>
     <pre class="line-numbers"><code class="language-javascript">
 # public/

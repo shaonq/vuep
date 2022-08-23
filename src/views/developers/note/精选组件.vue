@@ -6,13 +6,23 @@
 desc:
 网页顶部进度条加载的插件
 
-install:        
+install: 
 yarn add nprogress
 
-js:
-NProgress.configure({ trickle: false });
-NProgress.start();
-NProgress.done();
+js: <a class="u-btn u-btn--blue u-btn--small" @click="runJs('demo1')">runJs</a>
+<code id="demo1">
+  async function runJs() {
+  if (!window.NProgress){
+    await shaonq.loadJs('https://unpkg.com/nprogress@0.2.0/nprogress.js')
+    await shaonq.loadCss('https://unpkg.com/nprogress@0.2.0/nprogress.css')
+  }  
+  if (window.NProgress){
+    NProgress.start();
+    setTimeout(function(){  NProgress.done();},2000)
+  }
+}
+runJs()
+</code>
 
 github:
 https://github.com/rstacruz/nprogress
@@ -22,40 +32,39 @@ https://github.com/rstacruz/nprogress
 desc:
 网页水印插件
 
-install:        
+install:
 yarn add watermark-dom
 
-js:
-async function loadWaterMark() {
-  await shaonq.loadJs('https://www.mwcxs.top/static/testTool/watermark.js')
-  if (window.watermark)
-    window.watermark.load({
-      watermark_alpha: 0.15,
-      watermark_angle: 20,
-      watermark_color: '#000',
-      watermark_cols: 5,
-      watermark_rows: 5,
-      watermark_font: 'Vedana',
-      watermark_fontsize: '15',
-      watermark_txt: '测试水印，1021002301，测试水印，100101010111101',
-      watermark_x: 0,
-      watermark_y: 0,
-      watermark_width: 300,
-      watermark_height: 240,
-      watermark_x_space: 300,
-      watermark_y_space: 240,
-    })
+js: <a class="u-btn u-btn--blue u-btn--small" @click="runJs('demo2')">runJs</a>
+<code id="demo2">
+async function runJs() {
+  if (!window.watermark){
+    await shaonq.loadJs('https://unpkg.com/watermark-dom@2.2.0/index.js')
+  }  
+  if (window.watermark){
+     watermark.load({
+        watermark_alpha: 0.6,
+        watermark_angle: 24,
+        watermark_font: 'Vedana',
+        watermark_fontsize: '24',
+        watermark_txt: '示例:YANYUJIANGNAN',
+        watermark_width: 300,
+        watermark_height: 240,
+      })
+     setTimeout(function(){ watermark.remove()},2000)
+  }
 }
-
+runJs()
+</code>
 github:
 https://github.com/saucxs/watermark-dom
       </pre>
-      <blockquote>当前网页水印为重新仿写，感觉使用background这种方式更为合理</blockquote>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
 import shaonq from 'shaonq'
+
 import { onMounted, onUnmounted } from 'vue'
 
 import useWatermark from './base/useWatermark.js'
@@ -64,6 +73,15 @@ const { setWatermark, clearWatermark } = useWatermark()
 onMounted(() => {
   setWatermark('YANYUJIANGNAN')
 })
+
+const runJs = (id) => {
+  try {
+    new Function(document.getElementById(id)?.innerHTML)()
+  } catch (error) {
+    shaonq.toast('runJs Error')
+  }
+}
+
 onUnmounted(() => {
   clearWatermark()
 })
